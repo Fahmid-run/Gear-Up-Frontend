@@ -13,6 +13,12 @@ type loginState = {
   };
 };
 
+type registerState = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+};
+
 export const loginAction = async (
   prevState: loginState,
   formdata: FormData,
@@ -52,6 +58,33 @@ export const loginAction = async (
 
     redirect("/dashboard", "replace");
   }
+
+  return result;
+};
+
+export const SignUpAction = async (
+  prevState: registerState,
+  formdata: FormData,
+) => {
+  const paylaod = {
+    name: formdata.get("name"),
+    email: formdata.get("email"),
+    password: formdata.get("password"),
+    role: formdata.get("role"),
+    phone: formdata.get("phone"),
+    address: formdata.get("address"),
+  };
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(paylaod),
+  });
+  const result = res.json();
+
+  redirect("/login", "replace");
 
   return result;
 };

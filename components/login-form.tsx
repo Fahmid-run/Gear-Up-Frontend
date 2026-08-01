@@ -15,6 +15,7 @@ import { loginAction } from "@/app/(auth)/_actions/authAction";
 import { useActionState, useEffect } from "react";
 import { toast } from "./ui/toast";
 import router from "next/router";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -118,7 +119,13 @@ export function LoginForm({
                 </Button>
               </Field> */}
               <FieldDescription className="text-center">
-                Don&apos;t have an account? <a href="#">Sign up</a>
+                Don&apos;t have an account?{" "}
+                <Link
+                  href="/register"
+                  className="font-medium text-foreground underline underline-offset-4 hover:text-primary"
+                >
+                  Sign Up
+                </Link>
               </FieldDescription>
             </FieldGroup>
           </form>
