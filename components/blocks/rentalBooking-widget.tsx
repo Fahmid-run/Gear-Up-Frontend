@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Link from "next/link";
 
 const DAILY_PRICE = 35;
 
@@ -142,11 +143,7 @@ export function RentalBookingWidget() {
             className="w-full bg-green-700 text-white hover:bg-green-800"
             disabled={days === 0}
           >
-            Rent Now
-          </Button>
-          <Button variant="outline" className="w-full">
-            <Heart data-icon="inline-start" />
-            Add to Wishlist
+            <Link href={"/checkout"}>Rent Now</Link>
           </Button>
         </div>
       </CardContent>

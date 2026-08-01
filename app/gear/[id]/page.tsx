@@ -1,5 +1,4 @@
 import ClassicOverview from "@/components/blocks/ecommerce/product-overview/classic-overview";
-import React from "react";
 
 const GearItemOverviewPage = () => {
   return (

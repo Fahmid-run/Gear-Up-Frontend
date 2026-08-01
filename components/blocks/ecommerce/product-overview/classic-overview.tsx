@@ -58,21 +58,8 @@ export default function ClassicOverview() {
               <Truck className="h-4 w-4" />
               <span>Free Shipping</span>
             </div>
-            <div className="flex items-center gap-2 text-sm">
-              <ShieldCheck className="h-4 w-4" />
-              <span>2 Year Warranty</span>
-            </div>
           </div>
           <RentalBookingWidget></RentalBookingWidget>
-
-          <div className="mt-8 flex gap-4">
-            <Button size="lg" className="flex-1">
-              Add to Cart
-            </Button>
-            <Button size="lg" variant="outline" className="flex-1">
-              Buy Now
-            </Button>
-          </div>
         </div>
       </div>
     </div>
