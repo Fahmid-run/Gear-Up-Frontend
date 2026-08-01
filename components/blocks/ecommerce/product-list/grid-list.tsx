@@ -8,7 +8,7 @@ export default async function GridList() {
   return (
     <div className="mx-auto w-full max-w-7xl p-6">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {/* Product Card */}
+        {/* Gear Item Card */}
         {data.data.map((data: any, i: string) => (
           <div
             key={i}
