@@ -13,7 +13,13 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-type RentalStatus = "active" | "upcoming" | "returned" | "overdue";
+type RentalStatus =
+  | "PLACED"
+  | "CONFIRMED"
+  | "PAID"
+  | "PICKED_UP"
+  | "RETURNED"
+  | "CANCELLED";
 
 export type RentalOrder = {
   id: string;
@@ -26,18 +32,21 @@ export type RentalOrder = {
 };
 
 const statusStyles: Record<RentalStatus, string> = {
-  active:
-    "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
-  upcoming: "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-400",
-  returned: "bg-muted text-muted-foreground",
-  overdue: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
+  PAID: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
+  CONFIRMED: "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-400",
+  PLACED: "bg-muted text-muted-foreground",
+  RETURNED: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
+  PICKED_UP: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
+  CANCELLED: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
 };
 
 const statusLabels: Record<RentalStatus, string> = {
-  active: "Active",
-  upcoming: "Upcoming",
-  returned: "Returned",
-  overdue: "Overdue",
+  PLACED: "PLACED",
+  CONFIRMED: "CONFIRMED",
+  PAID: "PAID",
+  PICKED_UP: "PICKED_UP",
+  RETURNED: "RETURNED",
+  CANCELLED: "CANCELLED",
 };
 
 const defaultOrders: RentalOrder[] = [
@@ -47,7 +56,7 @@ const defaultOrders: RentalOrder[] = [
     productImage: "/products/camera.png",
     startDate: "Aug 2, 2026",
     endDate: "Aug 9, 2026",
-    status: "active",
+    status: "PLACED",
     total: "$189.00",
   },
   {
@@ -56,7 +65,7 @@ const defaultOrders: RentalOrder[] = [
     productImage: "/products/drone.png",
     startDate: "Aug 5, 2026",
     endDate: "Aug 8, 2026",
-    status: "upcoming",
+    status: "CANCELLED",
     total: "$142.50",
   },
   {
@@ -65,7 +74,7 @@ const defaultOrders: RentalOrder[] = [
     productImage: "/products/tent.png",
     startDate: "Jul 18, 2026",
     endDate: "Jul 25, 2026",
-    status: "returned",
+    status: "CONFIRMED",
     total: "$96.00",
   },
   {
@@ -74,7 +83,7 @@ const defaultOrders: RentalOrder[] = [
     productImage: "/products/ebike.png",
     startDate: "Jul 10, 2026",
     endDate: "Jul 14, 2026",
-    status: "overdue",
+    status: "PAID",
     total: "$220.00",
   },
 ];
@@ -152,12 +161,11 @@ export function RentalOrdersTable({
                 </TableCell>
                 <TableCell className="font-medium">{order.total}</TableCell>
                 <TableCell className="pr-6 text-right">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onViewDetails?.(order)}
-                  >
-                    View details
+                  <Button variant="outline" size="sm">
+                    Confirm
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    Mark Pick Up
                   </Button>
                 </TableCell>
               </TableRow>

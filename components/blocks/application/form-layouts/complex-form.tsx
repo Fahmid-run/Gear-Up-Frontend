@@ -14,6 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { UploadCloud } from "lucide-react";
 import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function ComplexForm() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -53,7 +54,7 @@ export default function ComplexForm() {
                 </div>
                 <div className="col-span-full space-y-2">
                   <Label htmlFor="about">Description</Label>
-                  <textarea
+                  <Textarea
                     id="description"
                     placeholder="Write a description"
                   />
