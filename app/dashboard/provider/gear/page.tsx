@@ -1,7 +1,12 @@
+import { GearList } from "@/components/blocks/gearList";
 import React from "react";
 
-const ProviderGearListings = () => {
-  return <div></div>;
+const GearPage = () => {
+  return (
+    <div>
+      <GearList></GearList>
+    </div>
+  );
 };
 
-export default ProviderGearListings;
+export default GearPage;
