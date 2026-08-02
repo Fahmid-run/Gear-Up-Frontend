@@ -20,23 +20,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getMe, logout } from "@/service/getMe";
-import { useEffect, useState } from "react";
+import { toast } from "../ui/toast";
+
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Register", href: "/register" },
-  { label: "Login", href: "/login" },
+  { label: "Register", href: "/register", guestOnly: true },
+  { label: "Login", href: "/login", guestOnly: true },
 ];
 
-export function SiteNavbar() {
-  const [user, setUser] = useState([]);
-  useEffect(async () => {
-    const res = await getMe();
-  }, []);
-  const handleLogout = async () => {
-    const res = await logout();
+export function SiteNavbar({ user }: { user: any }) {
+  const router = useRouter();
 
-    console.log(res);
+  console.log(user);
+
+  const visibleLinks = navLinks.filter(
+    (link) => !(user?.success && link.guestOnly),
+  );
+  console.log(visibleLinks);
+  const handleLogout = async () => {
+    await logout();
+    toast.add({
+      type: "success",
+      description: "Logout",
+    });
+    router.push("/login");
   };
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -49,7 +58,7 @@ export function SiteNavbar() {
 
         {/* Middle: Nav links */}
         <ul className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
+          {visibleLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
@@ -62,42 +71,44 @@ export function SiteNavbar() {
         </ul>
 
         {/* Right: Profile menu (opens on hover) */}
-        <DropdownMenu openOnHover>
-          <DropdownMenuTrigger
-            render={
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full"
-                aria-label="Open profile menu"
-              />
-            }
-          >
-            <User className="size-5" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem render={<Link href="/profile" />}>
-                <UserCircle className="size-4" />
-                My Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem render={<Link href="/dashboard" />}>
-                <LayoutDashboard className="size-4" />
-                Dashboard
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  handleLogout();
-                }}
-              >
-                <LogOut className="size-4"></LogOut>
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {user.success && (
+          <DropdownMenu openOnHover>
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full"
+                  aria-label="Open profile menu"
+                />
+              }
+            >
+              <User className="size-5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem render={<Link href="/profile" />}>
+                  <UserCircle className="size-4" />
+                  My Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem render={<Link href="/dashboard" />}>
+                  <LayoutDashboard className="size-4" />
+                  Dashboard
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                >
+                  <LogOut className="size-4"></LogOut>
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </nav>
     </header>
   );

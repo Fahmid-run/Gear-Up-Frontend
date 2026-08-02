@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toast";
-import { SiteNavbar } from "@/components/blocks/navbar";
 
 const jetbrainsMonoHeading = JetBrains_Mono({
   subsets: ["latin"],
@@ -45,9 +44,9 @@ export default function RootLayout({
         jetbrainsMonoHeading.variable,
       )}
     >
-      <Toaster />
       <body className="min-h-full flex flex-col">
-        <SiteNavbar></SiteNavbar>
+        <Toaster />
+
         {children}
       </body>
     </html>
