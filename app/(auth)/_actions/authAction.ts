@@ -23,8 +23,8 @@ export const loginAction = async (
   prevState: loginState,
   formdata: FormData,
 ) => {
-  const password = formdata.get("email");
-  const email = formdata.get("password");
+  const password = formdata.get("password");
+  const email = formdata.get("email");
 
   const payload = {
     email,
@@ -56,7 +56,7 @@ export const loginAction = async (
       sameSite: "lax",
     });
 
-    redirect("/dashboard", "replace");
+    redirect("/", "replace");
   }
 
   return result;
@@ -84,7 +84,6 @@ export const SignUpAction = async (
   });
   const result = res.json();
 
-  redirect("/login", "replace");
-
   return result;
+  redirect("/login", "replace");
 };
