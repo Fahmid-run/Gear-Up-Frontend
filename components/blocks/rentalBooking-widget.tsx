@@ -14,8 +14,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Link from "next/link";
-
-const DAILY_PRICE = 35;
+import { rentalItem } from "@/service/rentalItem";
+import { useRouter } from "next/navigation";
+import { toast } from "../ui/toast";
 
 function formatDate(date: Date | undefined) {
   if (!date) return "Select date";
@@ -77,7 +78,13 @@ function DateField({
   );
 }
 
-export function RentalBookingWidget() {
+export function RentalBookingWidget({
+  price,
+  data,
+}: {
+  price: number;
+  data: any;
+}) {
   const [startDate, setStartDate] = React.useState<Date | undefined>(
     new Date(2024, 4, 20),
   );
@@ -93,60 +100,111 @@ export function RentalBookingWidget() {
     return diff > 0 ? diff : 0;
   }, [startDate, endDate]);
 
-  const total = days * DAILY_PRICE;
+  const total = days * price;
 
   const handleStartSelect = (date: Date | undefined) => {
     setStartDate(date);
-    // Keep the range valid: clear end date if it is now before the start.
+
     if (date && endDate && endDate.getTime() <= date.getTime()) {
       setEndDate(undefined);
     }
   };
 
+  const router = useRouter(); // Initialize Next.js router
+  const [isLoading, setIsLoading] = React.useState(false);
+  const payload = {
+    startDate,
+    endDate,
+    items: [
+      {
+        gearItemId: data.id,
+        quantity: 1,
+      },
+    ],
+  };
+
+  const handleRentalBooking = async () => {
+    if (!startDate || !endDate || !data?.id) return;
+
+    try {
+      setIsLoading(true);
+
+      const payload = {
+        startDate,
+        endDate,
+        items: [
+          {
+            gearItemId: data.id,
+            quantity: 1,
+          },
+        ],
+      };
+
+      const response = await rentalItem(payload);
+      if (!response.success) {
+        toast.add({
+          type: "error",
+          description: response.message || "rental create Failed",
+        });
+      }
+
+      if (response.success) {
+        router.push("/checkout");
+      }
+    } catch (error) {
+      console.error("Failed to create rental:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <Card className="w-full max-w-md bg-muted/40">
-      <CardContent className="flex flex-col gap-6">
-        <h2 className="text-lg font-semibold text-balance">
-          Select Rental Dates
-        </h2>
+    <>
+      <Card className="w-full max-w-md bg-muted/40">
+        <CardContent className="flex flex-col gap-6">
+          <h2 className="text-lg font-semibold text-balance">
+            Select Rental Dates
+          </h2>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <DateField
-            id="start-date"
-            label="Start Date"
-            value={startDate}
-            onSelect={handleStartSelect}
-          />
-          <DateField
-            id="end-date"
-            label="End Date"
-            value={endDate}
-            onSelect={setEndDate}
-            disabled={(date) =>
-              startDate ? date.getTime() <= startDate.getTime() : false
-            }
-          />
-        </div>
-
-        <div className="flex items-center justify-between gap-4 border-t pt-4">
-          <div className="flex flex-col">
-            <span className="font-bold">Total Price</span>
-            <span className="text-sm text-muted-foreground">
-              ${DAILY_PRICE} x {days} {days === 1 ? "day" : "days"}
-            </span>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <DateField
+              id="start-date"
+              label="Start Date"
+              value={startDate}
+              onSelect={handleStartSelect}
+            />
+            <DateField
+              id="end-date"
+              label="End Date"
+              value={endDate}
+              onSelect={setEndDate}
+              disabled={(date) =>
+                startDate ? date.getTime() <= startDate.getTime() : false
+              }
+            />
           </div>
-          <span className="text-2xl font-bold">${total.toFixed(2)}</span>
-        </div>
 
-        <div className="flex flex-col gap-3">
-          <Button
-            className="w-full bg-green-700 text-white hover:bg-green-800"
-            disabled={days === 0}
-          >
-            <Link href={"/checkout"}>Rent Now</Link>
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="flex items-center justify-between gap-4 border-t pt-4">
+            <div className="flex flex-col">
+              <span className="font-bold">Total Price</span>
+              <span className="text-sm text-muted-foreground">
+                ${price} x {days} {days === 1 ? "day" : "days"}
+              </span>
+            </div>
+            <span className="text-2xl font-bold">${total.toFixed(2)}</span>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <Button
+              className="w-full bg-green-700 text-white hover:bg-green-800"
+              disabled={days === 0 || isLoading}
+              onClick={handleRentalBooking}
+            >
+              {isLoading ? "Processing..." : "Rent Now"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </>
   );
 }

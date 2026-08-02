@@ -45,9 +45,11 @@ export default function RootLayout({
         jetbrainsMonoHeading.variable,
       )}
     >
-      <SiteNavbar></SiteNavbar>
       <Toaster />
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteNavbar></SiteNavbar>
+        {children}
+      </body>
     </html>
   );
 }

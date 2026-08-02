@@ -1,6 +1,7 @@
 import { getGears } from "@/app/gear/_actions/gearAction";
 import { Button } from "@/components/ui/button";
 import { Heart, Star } from "lucide-react";
+import Link from "next/link";
 
 export default async function GridList() {
   const data = await getGears();
@@ -45,12 +46,9 @@ export default async function GridList() {
                   <div className="font-medium">${data.rentalPricePerDay}</div>
                 </div>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-4 ">
                 <Button size="sm" className="w-full">
-                  Buy Now
-                </Button>
-                <Button size="sm" variant="outline" className="w-full">
-                  Add to Cart
+                  <Link href={`/gear/${data.id}`}>Rent Now</Link>
                 </Button>
               </div>
             </div>

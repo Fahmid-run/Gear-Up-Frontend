@@ -7,7 +7,15 @@ export const getGears = async () => {
 
   const result = res.json();
 
-  console.log(result);
+  return result;
+};
+
+export const getGearById = async (gearID: string) => {
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/gear/${gearID}`, {
+    method: "GET",
+  });
+
+  const result = res.json();
 
   return result;
 };
