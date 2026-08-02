@@ -1,6 +1,6 @@
 import { getGears } from "@/app/gear/_actions/gearAction";
 import { Button } from "@/components/ui/button";
-import { Heart, LucideChartGantt, Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 
 export default async function GridList() {
   const data = await getGears();
