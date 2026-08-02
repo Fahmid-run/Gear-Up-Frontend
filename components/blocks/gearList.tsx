@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 type GearStatus =
   | "PLACED"
@@ -97,10 +98,19 @@ export function GearList({
   onViewAll?: () => void;
   onViewDetails?: (order: GearOrder) => void;
 }) {
+  const router = useRouter();
   return (
     <section className="w-full rounded-xl border bg-card text-card-foreground shadow-sm">
       <header className="flex items-center justify-between gap-4 px-6 py-4">
         <h2 className="text-lg font-semibold text-balance">My Gear</h2>
+        <Button
+          size={"lg"}
+          onClick={() => {
+            router.push("/dashboard/provider/gear/new");
+          }}
+        >
+          Add Item
+        </Button>
       </header>
 
       <div className="border-t">
@@ -155,7 +165,13 @@ export function GearList({
                   </Badge>
                 </TableCell> */}
                 <TableCell className="pr-6 text-right">
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      router.push("/dashboard/provider/gear/3123/edit");
+                    }}
+                  >
                     Edit
                   </Button>
                 </TableCell>

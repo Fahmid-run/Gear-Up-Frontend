@@ -14,9 +14,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Link from "next/link";
-import { rentalItem } from "@/service/rentalItem";
+
 import { useRouter } from "next/navigation";
 import { toast } from "../ui/toast";
+import { createRentalItem } from "@/service/rentalItem";
 
 function formatDate(date: Date | undefined) {
   if (!date) return "Select date";
@@ -140,7 +141,7 @@ export function RentalBookingWidget({
         ],
       };
 
-      const response = await rentalItem(payload);
+      const response = await createRentalItem(payload);
       if (!response.success) {
         toast.add({
           type: "error",

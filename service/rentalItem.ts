@@ -6,7 +6,7 @@ interface IRentalPaylaod {
   items: any;
 }
 
-export const rentalItem = async (payload: IRentalPaylaod) => {
+export const createRentalItem = async (payload: IRentalPaylaod) => {
   try {
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals`, {
       method: "POST",
@@ -15,6 +15,23 @@ export const rentalItem = async (payload: IRentalPaylaod) => {
       },
       body: JSON.stringify(payload),
     });
+
+    const result = res.json();
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getRentalOrders = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.BACKEND_API_URL}/api/provider/rentals`,
+      {
+        method: "GET",
+      },
+    );
 
     const result = res.json();
 
