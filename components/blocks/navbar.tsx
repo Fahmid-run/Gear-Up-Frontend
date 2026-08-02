@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Mountain, User, LayoutDashboard, UserCircle } from "lucide-react";
+import {
+  Mountain,
+  User,
+  LayoutDashboard,
+  UserCircle,
+  LogOut,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +19,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getMe, logout } from "@/service/getMe";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -21,9 +29,18 @@ const navLinks = [
 ];
 
 export function SiteNavbar() {
+  const [user, setUser] = useState([]);
+  useEffect(async () => {
+    const res = await getMe();
+  }, []);
+  const handleLogout = async () => {
+    const res = await logout();
+
+    console.log(res);
+  };
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-2">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Mountain className="size-6 text-primary" aria-hidden="true" />
@@ -69,6 +86,14 @@ export function SiteNavbar() {
               <DropdownMenuItem render={<Link href="/dashboard" />}>
                 <LayoutDashboard className="size-4" />
                 Dashboard
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                <LogOut className="size-4"></LogOut>
+                Logout
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
