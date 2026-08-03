@@ -36,40 +36,11 @@ export function useSidebar() {
   return context;
 }
 
-const sidebarLinks: SidebarLink[] = [
-  {
-    icon: <LayoutDashboard className="w-5 h-5" />,
-    label: "Overview",
-    href: "/dashboard",
-  },
-  {
-    icon: <ShoppingBag className="w-5 h-5" />,
-    label: "My Gears",
-    href: "/dashboard/provider/gear",
-  },
-  {
-    icon: <ShoppingBag className="w-5 h-5" />,
-    label: "My Orders",
-    href: "/dashboard/provider/orders",
-  },
-  {
-    icon: <CreditCard className="w-5 h-5" />,
-    label: "Payments",
-    href: "/dashboard/payments",
-  },
-  {
-    icon: <Star className="w-5 h-5" />,
-    label: "Reviews",
-    href: "/dashboard/reviews",
-  },
-  {
-    icon: <User className="w-5 h-5" />,
-    label: "Profile",
-    href: "/dashboard/profile",
-  },
-];
-
-export function SidebarProvider({ children }: { children: React.ReactNode }) {
+export function AdminSidebarProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -86,6 +57,43 @@ export function Sidebar() {
   const { isOpen, setIsOpen } = useSidebar();
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
+  const sidebarLinks: SidebarLink[] = [
+    {
+      icon: <LayoutDashboard className="w-5 h-5" />,
+      label: "Home",
+      href: "/",
+    },
+    {
+      icon: <LayoutDashboard className="w-5 h-5" />,
+      label: "Overview",
+      href: "/dashboard",
+    },
+    {
+      icon: <ShoppingBag className="w-5 h-5" />,
+      label: "My Gears",
+      href: "/dashboard/provider/gear",
+    },
+    {
+      icon: <ShoppingBag className="w-5 h-5" />,
+      label: "My Orders",
+      href: "/dashboard/provider/orders",
+    },
+    {
+      icon: <CreditCard className="w-5 h-5" />,
+      label: "Payments",
+      href: "/dashboard/payments",
+    },
+    {
+      icon: <Star className="w-5 h-5" />,
+      label: "Reviews",
+      href: "/dashboard/reviews",
+    },
+    {
+      icon: <User className="w-5 h-5" />,
+      label: "Profile",
+      href: "/dashboard/profile",
+    },
+  ];
   const handleLogout = () => {
     // Handle logout logic here
     console.log("Logging out...");

@@ -8,7 +8,6 @@ export default async function PublicLayout({
 }>) {
   const user = await getMe();
 
-  console.log(user);
   return (
     <>
       <SiteNavbar user={user} />

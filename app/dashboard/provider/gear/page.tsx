@@ -3,7 +3,7 @@ import React from "react";
 
 const GearPage = () => {
   return (
-    <div>
+    <div className="w-full px-4 py-6">
       <GearList></GearList>
     </div>
   );
