@@ -88,7 +88,7 @@ export function GearList({
                   </span>
                 </TableCell>
                 <TableCell className="font-medium">
-                  <h2>5</h2>
+                  <h2>{gear.stock}</h2>
                   <span className="text-sm text-muted-foreground">
                     {gear.availability}
                   </span>
@@ -110,7 +110,7 @@ export function GearList({
                     variant="outline"
                     size="sm"
                     onClick={() => {
-                      router.push("/dashboard/provider/gear/3123/edit");
+                      router.push(`/dashboard/provider/gear/${gear.id}/edit`);
                     }}
                   >
                     Edit

@@ -62,6 +62,12 @@ export function LoginForm({
                   placeholder="m@example.com"
                   required
                 />
+
+                {state?.errors?.email && (
+                  <p className="text-sm text-red-500">
+                    {state.errors.email[0]}
+                  </p>
+                )}
               </Field>
               <Field>
                 <div className="flex items-center">
@@ -80,6 +86,11 @@ export function LoginForm({
                   placeholder="Enter Your Password"
                   required
                 />
+                {state?.errors?.password && (
+                  <p className="text-sm text-red-500">
+                    {state.errors.password[0]}
+                  </p>
+                )}
               </Field>
               <Field>
                 <Button type="submit">

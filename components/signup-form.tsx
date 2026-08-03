@@ -91,6 +91,9 @@ export function SignupForm() {
               autoComplete="name"
               required
             />
+            {state?.errors?.name && (
+              <p className="text-sm text-red-500">{state.errors.name[0]}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -105,6 +108,9 @@ export function SignupForm() {
               autoComplete="email"
               required
             />
+            {state?.errors?.email && (
+              <p className="text-sm text-red-500">{state.errors.email[0]}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -119,6 +125,9 @@ export function SignupForm() {
               autoComplete="new-password"
               required
             />
+            {state?.errors?.password && (
+              <p className="text-sm text-red-500">{state.errors.password[0]}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -133,6 +142,9 @@ export function SignupForm() {
               autoComplete="tel"
               required
             />
+            {state?.errors?.phone && (
+              <p className="text-sm text-red-500">{state.errors.phone[0]}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -146,6 +158,10 @@ export function SignupForm() {
               autoComplete="street-address"
               required
             />
+
+            {state?.errors?.address && (
+              <p className="text-sm text-red-500">{state.errors.address[0]}</p>
+            )}
           </div>
 
           <div className="grid gap-2">

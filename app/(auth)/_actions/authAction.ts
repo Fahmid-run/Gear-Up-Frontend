@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { loginSchema, registerSchema } from "../_schema/authSchema";
 
 type loginState = {
   success: boolean;
@@ -24,13 +25,19 @@ export const loginAction = async (
   prevState: loginState,
   formdata: FormData,
 ) => {
-  const password = formdata.get("password");
-  const email = formdata.get("email");
+  const rawData = Object.fromEntries(formdata.entries());
 
-  const payload = {
-    email,
-    password,
-  };
+  const validated = loginSchema.safeParse(rawData);
+
+  if (!validated.success) {
+    return {
+      success: false,
+      values: rawData,
+      errors: validated.error.flatten().fieldErrors,
+    };
+  }
+
+  const payload = validated.data;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
     method: "POST",
@@ -73,21 +80,26 @@ export const SignUpAction = async (
   prevState: registerState,
   formdata: FormData,
 ) => {
-  const paylaod = {
-    name: formdata.get("name"),
-    email: formdata.get("email"),
-    password: formdata.get("password"),
-    role: formdata.get("role"),
-    phone: formdata.get("phone"),
-    address: formdata.get("address"),
-  };
+  const rawData = Object.fromEntries(formdata.entries());
+
+  const validated = registerSchema.safeParse(rawData);
+
+  if (!validated.success) {
+    return {
+      success: false,
+      values: rawData,
+      errors: validated.error.flatten().fieldErrors,
+    };
+  }
+
+  const payload = validated.data;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(paylaod),
+    body: JSON.stringify(payload),
   });
   const result = res.json();
 

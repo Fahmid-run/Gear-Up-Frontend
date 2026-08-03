@@ -133,6 +133,12 @@ export default function ComplexForm() {
                       <SelectItem value="water">water</SelectItem>
                     </SelectContent>
                   </Select>
+
+                  {state?.errors?.category && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.category[0]}
+                    </p>
+                  )}
                 </div>{" "}
                 <div className="space-y-2">
                   <Label>Availability</Label>
