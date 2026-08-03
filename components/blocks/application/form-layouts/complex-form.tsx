@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -13,8 +15,10 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { UploadCloud } from "lucide-react";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/toast";
+import { gearAction } from "@/app/dashboard/provider/gear/_actions/gearAction";
 
 export default function ComplexForm() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -30,6 +34,27 @@ export default function ComplexForm() {
     }
   };
 
+  const [state, action, pending] = useActionState(gearAction, false);
+
+  useEffect(() => {
+    if (!state) {
+      return;
+    }
+    if (state.success) {
+      toast.add({
+        type: "success",
+        description: "Gear Created",
+      });
+    }
+
+    if (!state.success) {
+      toast.add({
+        type: "error",
+        description: state.message || "Gear Creation Failed",
+      });
+    }
+  }, [state]);
+
   return (
     <div className="container mx-auto px-4 py-10 md:px-6 2xl:max-w-[1400px]">
       <Card>
@@ -37,7 +62,7 @@ export default function ComplexForm() {
           <CardTitle>Create Gear Listing</CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-8">
+          <form action={action} className="space-y-8">
             {/* Basic Information */}
             <div className="space-y-6">
               <div>
@@ -50,62 +75,109 @@ export default function ComplexForm() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Gear Name</Label>
-                  <Input id="name" placeholder="Enter gear name" />
+                  <Input
+                    name="name"
+                    id="name"
+                    placeholder="Enter gear name"
+                    defaultValue={state?.values?.name}
+                  />
+                  {state?.errors?.name && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.name[0]}
+                    </p>
+                  )}
                 </div>
                 <div className="col-span-full space-y-2">
-                  <Label htmlFor="about">Description</Label>
+                  <Label htmlFor="description">Description</Label>
                   <Textarea
+                    name="description"
                     id="description"
                     placeholder="Write a description"
+                    defaultValue={state?.values?.description}
                   />
+                  {state?.errors?.description && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.description[0]}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="brand">Brand</Label>
+                  <Input
+                    name="brand"
+                    id="brand"
+                    placeholder="Enter brand name"
+                    defaultValue={state?.values?.brand}
+                  />
+                  {state?.errors?.brand && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.brand[0]}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label>Gear Category</Label>
-                  <Select>
+                  <Select
+                    name="category"
+                    defaultValue={state?.values?.category}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="electronics">Electronics</SelectItem>
-                      <SelectItem value="clothing">Clothing</SelectItem>
-                      <SelectItem value="books">Books</SelectItem>
-                      <SelectItem value="home">Home & Garden</SelectItem>
+                      <SelectItem value="cycling">cycling</SelectItem>
+                      <SelectItem value="camping">camping</SelectItem>
+                      <SelectItem value="fitness">fitness</SelectItem>
+                      <SelectItem value="sports">sports</SelectItem>
+
+                      <SelectItem value="water">water</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>{" "}
                 <div className="space-y-2">
-                  <Label>Condition</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Condition" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="electronics">Electronics</SelectItem>
-                      <SelectItem value="clothing">Clothing</SelectItem>
-                      <SelectItem value="books">Books</SelectItem>
-                      <SelectItem value="home">Home & Garden</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
                   <Label>Availability</Label>
                   <RadioGroup
-                    defaultValue="instock"
+                    name="availability"
+                    defaultValue="AVAILABLE"
                     className="flex flex-col gap-4 sm:flex-row"
                   >
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="instock" id="instock" />
-                      <Label htmlFor="instock">In Stock</Label>
+                      <RadioGroupItem value="AVAILABLE" id="AVAILABLE" />
+                      <Label htmlFor="AVAILABLE">In Stock</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="preorder" id="preorder" />
-                      <Label htmlFor="preorder">Pre-order</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="backorder" id="backorder" />
-                      <Label htmlFor="backorder">Backorder</Label>
+                      <RadioGroupItem value="UNAVAILABLE" id="AVAILABLE" />
+                      <Label htmlFor="UNAVAILABLE">Unavailable</Label>
                     </div>
                   </RadioGroup>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="stock">Stock</Label>
+                  <Input
+                    name="stock"
+                    id="stock"
+                    type="number"
+                    defaultValue={state?.values?.stock}
+                  />
+                  {state?.errors?.stock && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.stock[0]}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="rentalPricePerDay">Rental Price</Label>
+                  <Input
+                    name="rentalPricePerDay"
+                    id="rentalPricePerDay"
+                    type="number"
+                    defaultValue={state?.values?.rentalPricePerDay}
+                  />
+                  {state?.errors?.rentalPricePerDay && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.rentalPricePerDay[0]}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -201,8 +273,10 @@ export default function ComplexForm() {
             </div> */}
 
             <div className="flex justify-end gap-4">
-              <Button variant="outline">Cancel</Button>
-              <Button>Create Gear</Button>
+              <Button variant="outline" type="button">
+                Cancel
+              </Button>
+              <Button type="submit">Create Gear</Button>
             </div>
           </form>
         </CardContent>
