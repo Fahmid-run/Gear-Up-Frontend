@@ -1,7 +1,6 @@
 import { GearList } from "@/components/blocks/gearList";
-import React from "react";
 
-const GearPage = () => {
+const GearPage = async () => {
   return (
     <div className="w-full px-4 py-6">
       <GearList></GearList>

@@ -21,16 +21,6 @@ type RentalStatus =
   | "RETURNED"
   | "CANCELLED";
 
-export type RentalOrder = {
-  id: string;
-  productName: string;
-  productImage: string;
-  startDate: string;
-  endDate: string;
-  status: RentalStatus;
-  total: string;
-};
-
 const statusStyles: Record<RentalStatus, string> = {
   PAID: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
   CONFIRMED: "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-400",
@@ -49,53 +39,14 @@ const statusLabels: Record<RentalStatus, string> = {
   CANCELLED: "CANCELLED",
 };
 
-const defaultOrders: RentalOrder[] = [
-  {
-    id: "RNT-10245",
-    productName: "Sony Alpha Mirrorless Camera",
-    productImage: "/products/camera.png",
-    startDate: "Aug 2, 2026",
-    endDate: "Aug 9, 2026",
-    status: "PLACED",
-    total: "$189.00",
-  },
-  {
-    id: "RNT-10238",
-    productName: "DJI Quadcopter Drone",
-    productImage: "/products/drone.png",
-    startDate: "Aug 5, 2026",
-    endDate: "Aug 8, 2026",
-    status: "CANCELLED",
-    total: "$142.50",
-  },
-  {
-    id: "RNT-10211",
-    productName: "4-Person Camping Tent",
-    productImage: "/products/tent.png",
-    startDate: "Jul 18, 2026",
-    endDate: "Jul 25, 2026",
-    status: "CONFIRMED",
-    total: "$96.00",
-  },
-  {
-    id: "RNT-10198",
-    productName: "Urban Electric Bike",
-    productImage: "/products/ebike.png",
-    startDate: "Jul 10, 2026",
-    endDate: "Jul 14, 2026",
-    status: "PAID",
-    total: "$220.00",
-  },
-];
-
 export function RentalOrdersTable({
-  orders = defaultOrders,
+  orders,
   onViewAll,
   onViewDetails,
 }: {
-  orders?: RentalOrder[];
+  orders?: any[];
   onViewAll?: () => void;
-  onViewDetails?: (order: RentalOrder) => void;
+  onViewDetails?: (order: any) => void;
 }) {
   return (
     <section className="w-full rounded-xl border bg-card text-card-foreground shadow-sm">
@@ -122,14 +73,14 @@ export function RentalOrdersTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders.map((order) => (
+            {orders?.map((order) => (
               <TableRow key={order.id}>
                 <TableCell className="pl-6">
                   <div className="flex items-center gap-3">
                     <div className="relative size-11 shrink-0 overflow-hidden rounded-lg border bg-muted">
                       <Image
-                        src={order.productImage || "/placeholder.svg"}
-                        alt={order.productName}
+                        src={order.items.gearItem.name || "/placeholder.svg"}
+                        alt={order.items.gearItem.image}
                         fill
                         sizes="44px"
                         className="object-cover"
@@ -137,7 +88,7 @@ export function RentalOrdersTable({
                     </div>
                     <div className="min-w-0">
                       <p className="truncate font-medium leading-tight">
-                        {order.productName}
+                        {order.items.gearItem.name}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {order.id}
@@ -153,13 +104,15 @@ export function RentalOrdersTable({
                     variant="secondary"
                     className={cn(
                       "rounded-full font-medium",
-                      statusStyles[order.status],
+                      statusStyles[order.irentalStatus],
                     )}
                   >
-                    {statusLabels[order.status]}
+                    {statusLabels[order.rentalStatus]}
                   </Badge>
                 </TableCell>
-                <TableCell className="font-medium">{order.total}</TableCell>
+                <TableCell className="font-medium">
+                  {order.totalAmount}
+                </TableCell>
                 <TableCell className="pr-6 text-right">
                   <Button variant="outline" size="sm">
                     Confirm
