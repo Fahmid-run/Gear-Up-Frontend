@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getMe, logout } from "@/service/getMe";
+import { logout } from "@/service/getMe";
 import { toast } from "../ui/toast";
 
 import { useRouter } from "next/navigation";
@@ -33,12 +33,9 @@ const navLinks = [
 export function SiteNavbar({ user }: { user: any }) {
   const router = useRouter();
 
-  console.log(user);
-
   const visibleLinks = navLinks.filter(
     (link) => !(user?.success && link.guestOnly),
   );
-  console.log(visibleLinks);
   const handleLogout = async () => {
     await logout();
     toast.add({

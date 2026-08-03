@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 type loginState = {
   success: boolean;
@@ -56,7 +57,13 @@ export const loginAction = async (
       sameSite: "lax",
     });
 
-    redirect("/", "replace");
+    const decodedJwt = jwt.decode(result.data.accessToken) as JwtPayload;
+
+    if (decodedJwt.role === "Customer") {
+      redirect("/dashboard/customer", "replace");
+    } else if (decodedJwt.role === "Provider") {
+      redirect("/");
+    }
   }
 
   return result;
