@@ -39,17 +39,17 @@ export function proxy(request: NextRequest) {
   }
 
   if (pathname.startsWith("/dashboard/admin") && userRole !== "Admin") {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/not-found", request.url));
   } else if (
     pathname.startsWith("/dashboard/customer") &&
     userRole !== "Customer"
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/not-found", request.url));
   } else if (
     pathname.startsWith("/dashboard/provider") &&
     userRole !== "Provider"
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/not-found", request.url));
   }
 
   return NextResponse.next();

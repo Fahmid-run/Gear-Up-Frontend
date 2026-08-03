@@ -24,13 +24,14 @@ import { toast } from "../ui/toast";
 
 import { useRouter } from "next/navigation";
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Register", href: "/register", guestOnly: true },
-  { label: "Login", href: "/login", guestOnly: true },
-];
-
 export function SiteNavbar({ user }: { user: any }) {
+  const navLinks = [
+    { label: "Home", href: "/" },
+    { label: "Dashboard", href: `/dashboard/${user.data?.role.toLowerCase()}` },
+    { label: "Register", href: "/register", guestOnly: true },
+    { label: "Login", href: "/login", guestOnly: true },
+  ];
+
   const router = useRouter();
 
   const visibleLinks = navLinks.filter(
