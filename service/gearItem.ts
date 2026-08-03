@@ -11,7 +11,7 @@ export const getMyGear = async () => {
     };
   }
 
-  const res = await fetch(`${process.env.BACKEND_API_URL}/api/gear`, {
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/provider/gear`, {
     headers: {
       Authorization: `${accessToken}`,
     },

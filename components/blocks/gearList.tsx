@@ -3,15 +3,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { cn } from "@/lib/utils";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 
 type GearStatus =
@@ -21,16 +13,6 @@ type GearStatus =
   | "PICKED_UP"
   | "RETURNED"
   | "CANCELLED";
-
-export type GearOrder = {
-  id: string;
-  productName: string;
-  productImage: string;
-  startDate: string;
-  endDate: string;
-  status: GearStatus;
-  total: string;
-};
 
 const statusStyles: Record<GearStatus, string> = {
   PAID: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
@@ -50,53 +32,14 @@ const statusLabels: Record<GearStatus, string> = {
   CANCELLED: "CANCELLED",
 };
 
-const defaultOrders: GearOrder[] = [
-  {
-    id: "RNT-10245",
-    productName: "Sony Alpha Mirrorless Camera",
-    productImage: "/products/camera.png",
-    startDate: "Aug 2, 2026",
-    endDate: "Aug 9, 2026",
-    status: "PLACED",
-    total: "$189.00",
-  },
-  {
-    id: "RNT-10238",
-    productName: "DJI Quadcopter Drone",
-    productImage: "/products/drone.png",
-    startDate: "Aug 5, 2026",
-    endDate: "Aug 8, 2026",
-    status: "CANCELLED",
-    total: "$142.50",
-  },
-  {
-    id: "RNT-10211",
-    productName: "4-Person Camping Tent",
-    productImage: "/products/tent.png",
-    startDate: "Jul 18, 2026",
-    endDate: "Jul 25, 2026",
-    status: "CONFIRMED",
-    total: "$96.00",
-  },
-  {
-    id: "RNT-10198",
-    productName: "Urban Electric Bike",
-    productImage: "/products/ebike.png",
-    startDate: "Jul 10, 2026",
-    endDate: "Jul 14, 2026",
-    status: "PAID",
-    total: "$220.00",
-  },
-];
-
 export function GearList({
-  orders = defaultOrders,
+  gearList,
   onViewAll,
   onViewDetails,
 }: {
-  orders?: GearOrder[];
+  gearList?: any[];
   onViewAll?: () => void;
-  onViewDetails?: (order: GearOrder) => void;
+  onViewDetails?: (gearList: any) => void;
 }) {
   const router = useRouter();
   return (
@@ -116,14 +59,14 @@ export function GearList({
       <div className="border-t">
         <Table>
           <TableBody>
-            {orders.map((order) => (
-              <TableRow key={order.id}>
+            {gearList?.map((gear) => (
+              <TableRow key={gear.id}>
                 <TableCell className="pl-6">
                   <div className="flex items-center gap-3">
                     <div className="relative size-11 shrink-0 overflow-hidden rounded-lg border bg-muted">
                       <Image
-                        src={order.productImage || "/placeholder.svg"}
-                        alt={order.productName}
+                        src={"/placeholder.svg"}
+                        alt={gear.name}
                         fill
                         sizes="44px"
                         className="object-cover"
@@ -131,17 +74,15 @@ export function GearList({
                     </div>
                     <div className="min-w-0">
                       <p className="truncate font-medium leading-tight">
-                        {order.productName}
+                        {gear.name}
                       </p>
-                      <p className="text-sm text-muted-foreground">
-                        {order.id}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{gear.id}</p>
                     </div>
                   </div>
                 </TableCell>
 
                 <TableCell className="font-medium">
-                  <h2>{order.total}/day</h2>
+                  <h2>{gear.rentalPricePerDay}/day</h2>
                   <span className="text-sm text-muted-foreground">
                     price per day
                   </span>
@@ -149,7 +90,7 @@ export function GearList({
                 <TableCell className="font-medium">
                   <h2>5</h2>
                   <span className="text-sm text-muted-foreground">
-                    In stock
+                    {gear.availability}
                   </span>
                 </TableCell>
 
@@ -158,10 +99,10 @@ export function GearList({
                     variant="secondary"
                     className={cn(
                       "rounded-full font-medium",
-                      statusStyles[order.status],
+                      statusStyles[gear.status],
                     )}
                   >
-                    {statusLabels[order.status]}
+                    {statusLabels[gear.status]}
                   </Badge>
                 </TableCell> */}
                 <TableCell className="pr-6 text-right">
