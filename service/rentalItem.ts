@@ -88,7 +88,7 @@ export const getProviderRentalOrders = async () => {
 
 export const updateRentalORderStatus = async (
   rentalOrderId: string,
-  rentalStatus: "CONFIRMED" | "PICKED_UP",
+  rentalStatus: "CONFIRMED" | "PICKED_UP" | "RETURNED",
 ) => {
   try {
     const cookie = cookies();

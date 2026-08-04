@@ -12,8 +12,6 @@ const PaymentSuccess = async ({
 
   const payment = await getSinglePayments(id!);
 
-  console.log(payment.data);
-
   return (
     <div>
       <PaymentSuccessPage payload={payment.data}></PaymentSuccessPage>

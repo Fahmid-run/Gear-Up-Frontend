@@ -26,11 +26,13 @@ type RentalStatus =
   | "CANCELLED";
 
 const statusStyles: Record<RentalStatus, string> = {
-  PAID: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
+  PICKED_UP:
+    "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
   CONFIRMED: "bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-400",
-  PLACED: "bg-muted text-muted-foreground",
-  RETURNED: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
-  PICKED_UP: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
+  RETURNED: "bg-muted text-muted-foreground",
+  PLACED:
+    "bg-orange-100 text-black-700 dark:bg-orange-500/15 dark:text-white-400",
+  PAID: "bg-purple-100 text-black-700 dark:bg-purple-500/15 dark:text-white-400",
   CANCELLED: "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400",
 };
 
@@ -56,6 +58,7 @@ export function RentalOrdersTable({
 }) {
   const router = useRouter();
 
+  const handleReview = async (orderId: string) => {};
   const handlePayment = async (rentalOrderId: string) => {
     const paymentInit = await paymentInitialization(rentalOrderId);
 
@@ -70,14 +73,24 @@ export function RentalOrdersTable({
   };
   const updateRentalStatus = async (
     orderId: string,
-    status: "CONFIRMED" | "PICKED_UP",
+    status: "CONFIRMED" | "PICKED_UP" | "RETURNED",
   ) => {
     try {
       const res = await updateRentalORderStatus(orderId, status);
+
       if (res.success) {
         toast.add({
           type: "success",
           description: "status updated",
+        });
+
+        router.refresh();
+      }
+
+      if (!res.success) {
+        toast.add({
+          type: "error",
+          description: res.message,
         });
 
         router.refresh();
@@ -157,7 +170,7 @@ export function RentalOrdersTable({
                         </Button>
                       )}
 
-                      {order.rentalStatus === "CONFIRMED" && (
+                      {order.rentalStatus === "PAID" && (
                         <Button
                           size="sm"
                           variant="outline"
@@ -170,10 +183,35 @@ export function RentalOrdersTable({
                       )}
                     </div>
                   )}
+
                   {userRole === "Customer" &&
                     order.rentalStatus === "CONFIRMED" && (
                       <Button size="sm" onClick={() => handlePayment(order.id)}>
                         Payment
+                      </Button>
+                    )}
+
+                  {userRole === "Customer" &&
+                    order.rentalStatus === "RETURNED" && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          updateRentalStatus(order.id, "PICKED_UP")
+                        }
+                      >
+                        Leave Review
+                      </Button>
+                    )}
+
+                  {userRole === "Provider" &&
+                    order.rentalStatus === "PICKED_UP" && (
+                      <Button
+                        size="sm"
+                        type="submit"
+                        onClick={() => handleReview(order.id)}
+                      >
+                        Return
                       </Button>
                     )}
                 </TableCell>
