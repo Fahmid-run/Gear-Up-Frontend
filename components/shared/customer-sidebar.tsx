@@ -76,12 +76,12 @@ export function Sidebar() {
     {
       icon: <ShoppingBag className="w-5 h-5" />,
       label: "My Orders",
-      href: "/dashboard/provider/orders",
+      href: "/dashboard/customer/order",
     },
     {
       icon: <CreditCard className="w-5 h-5" />,
       label: "Payments",
-      href: "/dashboard/payments",
+      href: "/dashboard/customer/payments",
     },
     {
       icon: <Star className="w-5 h-5" />,

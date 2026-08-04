@@ -15,9 +15,10 @@ import {
 } from "@/components/ui/popover";
 import Link from "next/link";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "../ui/toast";
 import { createRentalItem } from "@/service/rentalItem";
+import { paymentInitialization } from "@/service/paymentService";
 
 function formatDate(date: Date | undefined) {
   if (!date) return "Select date";
@@ -113,17 +114,9 @@ export function RentalBookingWidget({
 
   const router = useRouter(); // Initialize Next.js router
   const [isLoading, setIsLoading] = React.useState(false);
-  const payload = {
-    startDate,
-    endDate,
-    items: [
-      {
-        gearItemId: data.id,
-        quantity: 1,
-      },
-    ],
-  };
 
+  const params = useParams();
+  const id = params.id;
   const handleRentalBooking = async () => {
     if (!startDate || !endDate || !data?.id) return;
 
@@ -131,6 +124,7 @@ export function RentalBookingWidget({
       setIsLoading(true);
 
       const payload = {
+        id,
         startDate,
         endDate,
         items: [
@@ -145,12 +139,16 @@ export function RentalBookingWidget({
       if (!response.success) {
         toast.add({
           type: "error",
-          description: response.message || "rental create Failed",
+          description: response.message || "rental creation Failed",
         });
       }
 
       if (response.success) {
-        router.push("/checkout");
+        toast.add({
+          type: "success",
+          description: "rental Order created",
+        });
+        router.push("/dashboard/customer");
       }
     } catch (error) {
       console.error("Failed to create rental:", error);

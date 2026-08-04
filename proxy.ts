@@ -12,9 +12,7 @@ export function proxy(request: NextRequest) {
   const accessToken = request.cookies.get("accessToken")?.value;
   const refreshToken = request.cookies.get("refreshToken")?.value;
 
-  const isPublic = public_routes.some(
-    (route) => pathname === route || pathname.startsWith(route + "/"),
-  );
+  const isPublic = public_routes.includes(pathname);
 
   const decoded = accessToken ? (jwt.decode(accessToken) as JwtPayload) : null;
 
@@ -25,12 +23,12 @@ export function proxy(request: NextRequest) {
   if (accessToken && authRoutes.includes(pathname)) {
     if (userRole === "Customer") {
       return NextResponse.redirect(new URL("/dashboard/customer", request.url));
-    } else if (userRole === "Provider") {
+    }
+    if (userRole === "Provider") {
       return NextResponse.redirect(new URL("/dashboard/provider", request.url));
-    } else if (userRole === "Admin") {
+    }
+    if (userRole === "Admin") {
       return NextResponse.redirect(new URL("/dashboard/admin", request.url));
-    } else {
-      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 

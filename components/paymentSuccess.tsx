@@ -4,25 +4,11 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-interface PaymentSuccessPageProps {
-  orderId: string;
-  paymentId: string;
-  amountPaid: number;
-  dateTime: string;
-  currency?: string;
-}
-
-export function PaymentSuccessPage({
-  orderId,
-  paymentId,
-  amountPaid,
-  dateTime,
-  currency = "USD",
-}: PaymentSuccessPageProps) {
+export function PaymentSuccessPage({ payload }: { payload: any }) {
   const formattedAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: currency,
-  }).format(amountPaid);
+    currency: payload.currency,
+  }).format(payload.amount);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-accent/5 p-4">
@@ -50,16 +36,16 @@ export function PaymentSuccessPage({
             {/* Order ID */}
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">Order ID</span>
-              <span className="font-mono font-semibold text-foreground">
-                {orderId}
+              <span className="font-mono font-light text-foreground">
+                {payload.rentalOrderId}
               </span>
             </div>
 
             {/* Payment ID */}
             <div className="flex justify-between items-center border-t border-border pt-4">
               <span className="text-sm text-muted-foreground">Payment ID</span>
-              <span className="font-mono font-semibold text-foreground text-sm">
-                {paymentId}
+              <span className="font-mono font-light text-foreground text-sm">
+                {payload.id}
               </span>
             </div>
 
@@ -75,7 +61,7 @@ export function PaymentSuccessPage({
             <div className="flex justify-between items-center border-t border-border pt-4">
               <span className="text-sm text-muted-foreground">Date & Time</span>
               <span className="text-sm font-medium text-foreground">
-                {new Date(dateTime).toLocaleString("en-US", {
+                {new Date(payload.paidAt).toLocaleString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
@@ -89,7 +75,7 @@ export function PaymentSuccessPage({
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <Link href="/dashboard/orders" className="block">
+            <Link href="/dashboard/customer/order" className="block">
               <Button className="w-full" size="lg">
                 View My Orders
               </Button>

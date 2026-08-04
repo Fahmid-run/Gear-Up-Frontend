@@ -12,6 +12,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { updateRentalORderStatus } from "@/service/rentalItem";
+import { toast } from "@/components/ui/toast";
+import { useRouter } from "next/navigation";
+import { paymentInitialization } from "@/service/paymentService";
 
 type RentalStatus =
   | "PLACED"
@@ -41,13 +45,48 @@ const statusLabels: Record<RentalStatus, string> = {
 
 export function RentalOrdersTable({
   orders,
+  userRole,
   onViewAll,
   onViewDetails,
 }: {
   orders?: any[];
+  userRole: "Customer" | "Provider";
   onViewAll?: () => void;
   onViewDetails?: (order: any) => void;
 }) {
+  const router = useRouter();
+
+  const handlePayment = async (rentalOrderId: string) => {
+    const paymentInit = await paymentInitialization(rentalOrderId);
+
+    if (paymentInit.success) {
+      window.location.href = paymentInit.data.checkoutUrl;
+    } else {
+      toast.add({
+        type: "warning",
+        description: `${paymentInit.message}`,
+      });
+    }
+  };
+  const updateRentalStatus = async (
+    orderId: string,
+    status: "CONFIRMED" | "PICKED_UP",
+  ) => {
+    try {
+      const res = await updateRentalORderStatus(orderId, status);
+      if (res.success) {
+        toast.add({
+          type: "success",
+          description: "status updated",
+        });
+
+        router.refresh();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <section className="w-full rounded-xl border bg-card text-card-foreground shadow-sm">
       <header className="flex items-center justify-between gap-4 px-6 py-4">
@@ -77,19 +116,8 @@ export function RentalOrdersTable({
               <TableRow key={order.id}>
                 <TableCell className="pl-6">
                   <div className="flex items-center gap-3">
-                    <div className="relative size-11 shrink-0 overflow-hidden rounded-lg border bg-muted">
-                      <Image
-                        src={order.items.gearItem.name || "/placeholder.svg"}
-                        alt={order.items.gearItem.image}
-                        fill
-                        sizes="44px"
-                        className="object-cover"
-                      />
-                    </div>
                     <div className="min-w-0">
-                      <p className="truncate font-medium leading-tight">
-                        {order.items.gearItem.name}
-                      </p>
+                      <p className="truncate font-medium leading-tight">test</p>
                       <p className="text-sm text-muted-foreground">
                         {order.id}
                       </p>
@@ -104,7 +132,7 @@ export function RentalOrdersTable({
                     variant="secondary"
                     className={cn(
                       "rounded-full font-medium",
-                      statusStyles[order.irentalStatus],
+                      statusStyles[order.rentalStatus],
                     )}
                   >
                     {statusLabels[order.rentalStatus]}
@@ -113,13 +141,41 @@ export function RentalOrdersTable({
                 <TableCell className="font-medium">
                   {order.totalAmount}
                 </TableCell>
+
                 <TableCell className="pr-6 text-right">
-                  <Button variant="outline" size="sm">
-                    Confirm
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    Mark Pick Up
-                  </Button>
+                  {userRole === "Provider" && (
+                    <div className="flex justify-end gap-2">
+                      {order.rentalStatus === "PLACED" && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() =>
+                            updateRentalStatus(order.id, "CONFIRMED")
+                          }
+                        >
+                          Confirm
+                        </Button>
+                      )}
+
+                      {order.rentalStatus === "CONFIRMED" && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() =>
+                            updateRentalStatus(order.id, "PICKED_UP")
+                          }
+                        >
+                          Mark Picked Up
+                        </Button>
+                      )}
+                    </div>
+                  )}
+                  {userRole === "Customer" &&
+                    order.rentalStatus === "CONFIRMED" && (
+                      <Button size="sm" onClick={() => handlePayment(order.id)}>
+                        Payment
+                      </Button>
+                    )}
                 </TableCell>
               </TableRow>
             ))}
