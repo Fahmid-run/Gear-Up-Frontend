@@ -87,14 +87,11 @@ export function SiteNavbar({ user }: { user: any }) {
               <DropdownMenuGroup>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem render={<Link href="/profile" />}>
+                <DropdownMenuItem render={<Link href="/" />}>
                   <UserCircle className="size-4" />
                   My Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem render={<Link href="/dashboard" />}>
-                  <LayoutDashboard className="size-4" />
-                  Dashboard
-                </DropdownMenuItem>
+
                 <DropdownMenuItem
                   onClick={() => {
                     handleLogout();

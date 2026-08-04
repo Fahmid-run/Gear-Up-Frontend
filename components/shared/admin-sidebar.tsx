@@ -14,6 +14,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { logout } from "@/service/getMe";
+import { toast } from "../ui/toast";
+import { useRouter } from "next/navigation";
 
 interface SidebarLink {
   icon: React.ReactNode;
@@ -55,6 +58,7 @@ export function AdminSidebarProvider({
 
 export function Sidebar() {
   const { isOpen, setIsOpen } = useSidebar();
+
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   const sidebarLinks: SidebarLink[] = [
@@ -66,16 +70,16 @@ export function Sidebar() {
     {
       icon: <LayoutDashboard className="w-5 h-5" />,
       label: "Overview",
-      href: "/dashboard",
+      href: "/dashboard/admin",
     },
     {
       icon: <ShoppingBag className="w-5 h-5" />,
-      label: "My Gears",
+      label: "Gears",
       href: "/dashboard/provider/gear",
     },
     {
       icon: <ShoppingBag className="w-5 h-5" />,
-      label: "My Orders",
+      label: "Orders",
       href: "/dashboard/provider/orders",
     },
     {
@@ -94,9 +98,15 @@ export function Sidebar() {
       href: "/dashboard/profile",
     },
   ];
-  const handleLogout = () => {
-    // Handle logout logic here
-    console.log("Logging out...");
+
+  const router = useRouter();
+  const handleLogout = async () => {
+    await logout();
+    toast.add({
+      type: "success",
+      description: "Logout",
+    });
+    router.push("/login");
   };
 
   return (

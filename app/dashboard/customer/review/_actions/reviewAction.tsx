@@ -31,8 +31,6 @@ export async function submitReview(
 
   const customerId = jwt.decode(accessToken)?.authorId;
 
-  console.log(gearItemId);
-
   const rawData = {
     review,
     rating,

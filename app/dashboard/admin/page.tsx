@@ -100,9 +100,9 @@ const mockDashboardMetrics: DashboardMetricss = {
   totalRentals: 892,
 };
 
-export function AdminPanel() {
+export default function AdminPanel() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 px-6 py-10">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
