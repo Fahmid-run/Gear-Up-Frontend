@@ -53,7 +53,7 @@ export const getMyRentalOrders = async () => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    throw new Error(error.message);
   }
 };
 

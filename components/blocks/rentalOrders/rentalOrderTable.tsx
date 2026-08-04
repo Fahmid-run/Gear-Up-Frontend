@@ -16,6 +16,7 @@ import { updateRentalORderStatus } from "@/service/rentalItem";
 import { toast } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 import { paymentInitialization } from "@/service/paymentService";
+import { createReview } from "@/service/review";
 
 type RentalStatus =
   | "PLACED"
@@ -58,7 +59,6 @@ export function RentalOrdersTable({
 }) {
   const router = useRouter();
 
-  const handleReview = async (orderId: string) => {};
   const handlePayment = async (rentalOrderId: string) => {
     const paymentInit = await paymentInitialization(rentalOrderId);
 
@@ -197,7 +197,9 @@ export function RentalOrdersTable({
                         size="sm"
                         variant="outline"
                         onClick={() =>
-                          updateRentalStatus(order.id, "PICKED_UP")
+                          router.push(
+                            `/dashboard/customer/review/${order.items[0].gearItemId}`,
+                          )
                         }
                       >
                         Leave Review
@@ -209,7 +211,7 @@ export function RentalOrdersTable({
                       <Button
                         size="sm"
                         type="submit"
-                        onClick={() => handleReview(order.id)}
+                        onClick={() => updateRentalStatus(order.id, "RETURNED")}
                       >
                         Return
                       </Button>
