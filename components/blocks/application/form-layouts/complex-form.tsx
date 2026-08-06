@@ -32,6 +32,8 @@ export default function ComplexForm() {
       };
       reader.readAsDataURL(file);
     }
+
+    console.log(file);
   };
 
   const [state, action, pending] = useActionState(gearAction, false);

@@ -23,8 +23,7 @@ export interface User {
   email: string;
   role: UserRole;
   address: string;
-  status: "active" | "suspended";
-  joinedDate: string;
+  status: "ACTIVE" | "SUSPENDED";
 }
 
 interface UserManagementProps {
@@ -63,7 +62,7 @@ export function UserManagement({ users: initialUsers }: UserManagementProps) {
         user.id === userId
           ? {
               ...user,
-              status: user.status === "active" ? "suspended" : "active",
+              status: user.status === "ACTIVE" ? "SUSPENDED" : "ACTIVE",
             }
           : user,
       ),
@@ -78,17 +77,15 @@ export function UserManagement({ users: initialUsers }: UserManagementProps) {
 
   const getRoleBadgeVariant = (role: string) => {
     switch (role) {
-      case "admin":
+      case "Provider":
         return "default";
-      case "manager":
-        return "secondary";
       default:
         return "outline";
     }
   };
 
   const getStatusBadgeVariant = (status: string) => {
-    return status === "active" ? "default" : "destructive";
+    return status === "ACTIVE" ? "secondary" : "destructive";
   };
 
   return (
@@ -143,12 +140,12 @@ export function UserManagement({ users: initialUsers }: UserManagementProps) {
                     <TableCell className="text-right">
                       <Button
                         variant={
-                          user.status === "active" ? "outline" : "default"
+                          user.status === "ACTIVE" ? "outline" : "default"
                         }
                         size="sm"
                         onClick={() => toggleUserStatus(user.id)}
                       >
-                        {user.status === "active" ? "Suspend" : "Activate"}
+                        {user.status === "ACTIVE" ? "Suspend" : "Activate"}
                       </Button>
                     </TableCell>
                   </TableRow>

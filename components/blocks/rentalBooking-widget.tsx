@@ -88,10 +88,10 @@ export function RentalBookingWidget({
   data: any;
 }) {
   const [startDate, setStartDate] = React.useState<Date | undefined>(
-    new Date(2024, 4, 20),
+    new Date(2026, 8, 9),
   );
   const [endDate, setEndDate] = React.useState<Date | undefined>(
-    new Date(2024, 4, 23),
+    new Date(2026, 8, 20),
   );
 
   const days = React.useMemo(() => {

@@ -68,8 +68,13 @@ export const loginAction = async (
 
     if (decodedJwt.role === "Customer") {
       redirect("/dashboard/customer", "replace");
-    } else if (decodedJwt.role === "Provider") {
-      redirect("/");
+    }
+    if (decodedJwt.role === "Provider") {
+      redirect("/dashboard/provider", "replace");
+    }
+
+    if (decodedJwt.role === "Admin") {
+      redirect("/dashboard/admin", "replace");
     }
   }
 

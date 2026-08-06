@@ -152,7 +152,7 @@ export function RentalOrdersTable({
                   </Badge>
                 </TableCell>
                 <TableCell className="font-medium">
-                  {order.totalAmount}
+                  $ {order.totalAmount}
                 </TableCell>
 
                 <TableCell className="pr-6 text-right">
