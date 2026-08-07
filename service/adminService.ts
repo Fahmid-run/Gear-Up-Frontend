@@ -72,3 +72,24 @@ export const getAllGears = async () => {
 
   return result;
 };
+
+export const getAllPayments = async () => {
+  const cookie = cookies();
+
+  const accessToken = (await cookie).get("accessToken")?.value;
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Forbidden",
+    };
+  }
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/payments/all`, {
+    method: "GET",
+    headers: {
+      Authorization: `${accessToken}`,
+    },
+  });
+
+  return res.json();
+};

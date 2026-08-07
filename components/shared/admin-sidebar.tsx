@@ -13,6 +13,7 @@ import {
   Menu,
   ListOrdered,
   ToolCase,
+  HomeIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -65,7 +66,7 @@ export function Sidebar() {
 
   const sidebarLinks: SidebarLink[] = [
     {
-      icon: <LayoutDashboard className="w-5 h-5" />,
+      icon: <HomeIcon className="w-5 h-5" />,
       label: "Home",
       href: "/",
     },
@@ -87,7 +88,7 @@ export function Sidebar() {
     {
       icon: <CreditCard className="w-5 h-5" />,
       label: "Payments",
-      href: "/dashboard/payments",
+      href: "/dashboard/admin/payments",
     },
     {
       icon: <Star className="w-5 h-5" />,
