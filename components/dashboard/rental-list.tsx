@@ -8,30 +8,11 @@ import { Search, X, Star } from "lucide-react";
 import { DataTable } from "./data-table";
 import { StatusBadge } from "./status-badge";
 
-interface Rental {
-  id: string;
-  gearName: string;
-  category: string;
-  provider: string;
-  startDate: string;
-  endDate: string;
-  dailyRate: number;
-  totalCost: number;
-  status: "active" | "completed" | "cancelled";
-  rating: number | null;
-}
-
 interface RentalsListProps {
-  rentals: Rental[];
-  onCancelRental: (id: string) => void;
-  onRateRental: (id: string, rating: number) => void;
+  rentals: any[];
 }
 
-export function RentalsList({
-  rentals,
-  onCancelRental,
-  onRateRental,
-}: RentalsListProps) {
+export function RentalsList({ rentals }: RentalsListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [cancelingId, setCancelingId] = useState<string | null>(null);
@@ -64,14 +45,12 @@ export function RentalsList({
   const handleCancel = (id: string) => {
     setCancelingId(id);
     setTimeout(() => {
-      onCancelRental(id);
       setCancelingId(null);
     }, 500);
   };
 
   const handleSubmitRating = (id: string) => {
     if (selectedRating > 0) {
-      onRateRental(id, selectedRating);
       setRatingId(null);
       setSelectedRating(0);
     }
@@ -81,7 +60,7 @@ export function RentalsList({
     {
       key: "gearName",
       label: "Gear",
-      render: (rental: Rental) => (
+      render: (rental: any) => (
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-lg bg-slate-200" />
           <div>
@@ -94,14 +73,14 @@ export function RentalsList({
     {
       key: "category",
       label: "Category",
-      render: (rental: Rental) => (
+      render: (rental: any) => (
         <span className="text-slate-700">{rental.category}</span>
       ),
     },
     {
       key: "dates",
       label: "Rental Period",
-      render: (rental: Rental) => (
+      render: (rental: any) => (
         <div className="text-sm">
           <p className="font-medium text-slate-900">{rental.startDate}</p>
           <p className="text-slate-500">{rental.endDate}</p>
@@ -111,7 +90,7 @@ export function RentalsList({
     {
       key: "totalCost",
       label: "Cost",
-      render: (rental: Rental) => (
+      render: (rental: any) => (
         <div>
           <p className="font-semibold text-slate-900">${rental.totalCost}</p>
           <p className="text-sm text-slate-500">${rental.dailyRate}/day</p>
@@ -121,12 +100,12 @@ export function RentalsList({
     {
       key: "status",
       label: "Status",
-      render: (rental: Rental) => <StatusBadge status={rental.status} />,
+      render: (rental: any) => <StatusBadge status={rental.status} />,
     },
     {
       key: "actions",
       label: "Actions",
-      render: (rental: Rental) => (
+      render: (rental: any) => (
         <div className="flex flex-col gap-2">
           {rental.status === "active" && (
             <Button

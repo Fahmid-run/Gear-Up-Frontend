@@ -3,30 +3,10 @@ import { OverviewSection } from "@/components/dashboard/overview-section";
 import { getMyGear } from "@/service/gearItem";
 import { providerOverviewStats } from "@/service/providerService";
 
-interface Gear {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  status: "available" | "rented" | "maintenance";
-  rentals: number;
-  rating: number;
-  createdAt: string;
-}
-
 export default async function ProviderDashboard() {
-  const handleEdit = (id: string) => {
-    console.log("Edit gear:", id);
-    // Implement edit logic here
-  };
-
-  const handleDelete = (id: string) => {};
-  const handleUpdate = (id: string) => {};
-
   const stats = await providerOverviewStats();
 
   const gears = await getMyGear();
-  console.log(gears);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-3">

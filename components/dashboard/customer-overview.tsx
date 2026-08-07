@@ -6,8 +6,7 @@ import { CreditCard, RotateCw, Star, Zap } from "lucide-react";
 interface Stats {
   totalPayments: number;
   totalRentals: number;
-  activeRentals: number;
-  averageRating: number;
+  confirmedRentals: number;
 }
 
 interface CustomerOverviewSectionProps {
@@ -36,25 +35,16 @@ export function CustomerOverviewSection({
     },
     {
       title: "Active Rentals",
-      value: stats.activeRentals,
+      value: stats.confirmedRentals,
       icon: Zap,
       bgColor: "bg-purple-50",
       iconColor: "text-purple-600",
       borderColor: "border-purple-200",
     },
-    {
-      title: "Average Rating",
-      value:
-        stats.averageRating > 0 ? stats.averageRating.toFixed(1) : "No ratings",
-      icon: Star,
-      bgColor: "bg-amber-50",
-      iconColor: "text-amber-600",
-      borderColor: "border-amber-200",
-    },
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {statCards.map((stat) => {
         const Icon = stat.icon;
         return (

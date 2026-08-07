@@ -18,32 +18,6 @@ interface User {
   status: "ACTIVE" | "SUSPENDED";
   joinedDate: string;
 }
-const mockCustomers: User[] = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john@example.com",
-    role: "Admin",
-    address: "123 Main St, New York, NY 10001",
-    status: "ACTIVE",
-    joinedDate: "2024-01-15",
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    email: "jane@example.com",
-    role: "Provider",
-    address: "456 Oak Ave, Los Angeles, CA 90001",
-    status: "SUSPENDED",
-    joinedDate: "2024-01-20",
-  },
-];
-
-const mockDashboardMetrics: DashboardMetricss = {
-  totalCustomers: 128,
-  activeGear: 45,
-  totalRentals: 892,
-};
 
 export default async function AdminPanel() {
   const userData = await getAllUser();
