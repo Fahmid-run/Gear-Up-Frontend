@@ -4,10 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Package, CreditCard, RotateCw, Star } from "lucide-react";
 
 interface Stats {
-  totalGears: number;
+  totalGearItems: number;
   totalPayments: number;
   totalRentals: number;
-  totalReviews: number;
 }
 
 interface OverviewSectionProps {
@@ -15,10 +14,13 @@ interface OverviewSectionProps {
 }
 
 export function OverviewSection({ stats }: OverviewSectionProps) {
+  const payment = stats.totalPayments
+    ? stats.totalPayments.toLocaleString()
+    : 0;
   const statCards = [
     {
       title: "Total Gear Items",
-      value: stats.totalGears,
+      value: stats.totalGearItems,
       icon: Package,
       bgColor: "bg-blue-50",
       iconColor: "text-blue-600",
@@ -26,7 +28,7 @@ export function OverviewSection({ stats }: OverviewSectionProps) {
     },
     {
       title: "Total Payments",
-      value: `$${stats.totalPayments.toLocaleString()}`,
+      value: `$${payment}`,
       icon: CreditCard,
       bgColor: "bg-green-50",
       iconColor: "text-green-600",
@@ -42,7 +44,7 @@ export function OverviewSection({ stats }: OverviewSectionProps) {
     },
     {
       title: "Average Rating",
-      value: stats.totalReviews.toFixed(1),
+      value: 12,
       icon: Star,
       bgColor: "bg-amber-50",
       iconColor: "text-amber-600",

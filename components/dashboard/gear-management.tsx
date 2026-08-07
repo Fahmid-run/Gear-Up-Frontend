@@ -11,26 +11,23 @@ import { StatusBadge } from "./status-badge";
 interface Gear {
   id: string;
   name: string;
-  category: string;
-  price: number;
-  status: "available" | "rented" | "maintenance";
-  rentals: number;
-  rating: number;
+  rentalPricePerDay: number;
+  availability: "AVAILABLE" | "UNAVAILABLE" | "RENTED";
   createdAt: string;
 }
 
 interface GearManagementProps {
   gears: Gear[];
-  onDelete: (id: string) => void;
-  onEdit: (id: string) => void;
-  onUpdate: (id: string, updates: Partial<Gear>) => void;
+  // onDelete: (id: string) => void;
+  // onEdit: (id: string) => void;
+  // onUpdate: (id: string, updates: Partial<Gear>) => void;
 }
 
 export function GearManagement({
   gears,
-  onDelete,
-  onEdit,
-  onUpdate,
+  // onDelete,
+  // onEdit,
+  // onUpdate,
 }: GearManagementProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,8 +42,8 @@ export function GearManagement({
     return gears.filter(
       (gear) =>
         gear.name.toLowerCase().includes(query) ||
-        gear.category.toLowerCase().includes(query) ||
-        gear.status.toLowerCase().includes(query),
+        // gear.category.toLowerCase().includes(query) ||
+        gear.availability.toLowerCase().includes(query),
     );
   }, [gears, searchQuery]);
 
@@ -61,7 +58,7 @@ export function GearManagement({
   const handleDelete = (id: string) => {
     setDeletingId(id);
     setTimeout(() => {
-      onDelete(id);
+      // onDelete(id);
       setDeletingId(null);
     }, 500);
   };
@@ -75,7 +72,7 @@ export function GearManagement({
           <div className="h-10 w-10 rounded-lg bg-slate-200" />
           <div>
             <p className="font-medium text-slate-900">{gear.name}</p>
-            <p className="text-sm text-slate-500">{gear.category}</p>
+            {/* <p className="text-sm text-slate-500">{gear.category}</p> */}
           </div>
         </div>
       ),
@@ -84,31 +81,20 @@ export function GearManagement({
       key: "price",
       label: "Daily Rate",
       render: (gear: Gear) => (
-        <span className="font-semibold">${gear.price}</span>
+        <span className="font-semibold">${gear.rentalPricePerDay}</span>
       ),
     },
     {
       key: "status",
       label: "Status",
-      render: (gear: Gear) => <StatusBadge status={gear.status} />,
+      render: (gear: Gear) => <StatusBadge status={gear.availability} />,
     },
     {
       key: "rentals",
       label: "Total Rentals",
-      render: (gear: Gear) => (
-        <span className="text-slate-900">{gear.rentals}</span>
-      ),
+      render: (gear: Gear) => <span className="text-slate-900">rentals</span>,
     },
-    {
-      key: "rating",
-      label: "Rating",
-      render: (gear: Gear) => (
-        <div className="flex items-center gap-1">
-          <span className="font-semibold text-slate-900">{gear.rating}</span>
-          <span className="text-amber-500">★</span>
-        </div>
-      ),
-    },
+
     {
       key: "actions",
       label: "Actions",
@@ -117,7 +103,7 @@ export function GearManagement({
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => onEdit(gear.id)}
+            // onClick={() => onEdit(gear.id)}
             className="text-blue-600 hover:bg-blue-50"
           >
             <Edit2 className="h-4 w-4" />
