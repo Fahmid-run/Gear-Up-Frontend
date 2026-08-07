@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   Menu,
   HomeIcon,
+  ToolCase,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -66,7 +67,7 @@ export function Sidebar() {
       href: "/dashboard/provider",
     },
     {
-      icon: <ShoppingBag className="w-5 h-5" />,
+      icon: <ToolCase className="w-5 h-5" />,
       label: "My Gears",
       href: "/dashboard/provider/gear",
     },

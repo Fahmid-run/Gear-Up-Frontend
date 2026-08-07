@@ -53,7 +53,7 @@ export function RentalOrdersTable({
   onViewDetails,
 }: {
   orders?: any[];
-  userRole: "Customer" | "Provider";
+  userRole: "Customer" | "Provider" | "Admin";
   onViewAll?: () => void;
   onViewDetails?: (order: any) => void;
 }) {
@@ -121,7 +121,9 @@ export function RentalOrdersTable({
               <TableHead>Dates</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Total</TableHead>
-              <TableHead className="pr-6 text-right">Action</TableHead>
+              {userRole !== "Admin" && (
+                <TableHead className="pr-6 text-right">Action</TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>

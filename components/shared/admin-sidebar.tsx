@@ -11,6 +11,8 @@ import {
   LogOut,
   ChevronLeft,
   Menu,
+  ListOrdered,
+  ToolCase,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -73,14 +75,14 @@ export function Sidebar() {
       href: "/dashboard/admin",
     },
     {
-      icon: <ShoppingBag className="w-5 h-5" />,
+      icon: <ToolCase className="w-5 h-5" />,
       label: "Gears",
-      href: "/dashboard/provider/gear",
+      href: "/dashboard/admin/gears",
     },
     {
       icon: <ShoppingBag className="w-5 h-5" />,
       label: "Orders",
-      href: "/dashboard/provider/orders",
+      href: "/dashboard/admin/orders",
     },
     {
       icon: <CreditCard className="w-5 h-5" />,
@@ -114,7 +116,7 @@ export function Sidebar() {
       {/* Mobile Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 md:hidden p-2 hover:bg-accent rounded-lg transition-colors"
+        className="fixed top-2 left-5 z-50 md:hidden p-2 hover:bg-accent hover:text-white rounded-lg transition-colors"
       >
         {isOpen ? (
           <ChevronLeft className="w-6 h-6" />
@@ -135,8 +137,8 @@ export function Sidebar() {
       <aside
         className={cn(
           "bg-background border-r border-border transition-all duration-300 flex flex-col h-screen sticky top-0",
-          "fixed md:relative top-0 left-0 z-40 md:z-0 md:sticky md:top-0",
-          isOpen ? "w-64" : "w-20",
+          " top-0 left-0 z-40 md:z-0 md:sticky md:top-0",
+          isOpen ? "w-100 md:w-64" : "w-20",
         )}
       >
         <div className="flex flex-col h-full p-4 md:p-3">

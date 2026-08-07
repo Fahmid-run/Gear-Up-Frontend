@@ -36,3 +36,39 @@ export const getStates = async () => {
 
   return result;
 };
+
+export const getAllRentals = async () => {
+  const cookie = cookies();
+
+  const accessToken = (await cookie).get("accessToken")?.value;
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/rentals`, {
+    headers: {
+      method: "GET",
+      "Content-Type": "application/json",
+      Authorization: `${accessToken}`,
+    },
+  });
+
+  const result = res.json();
+
+  return result;
+};
+
+export const getAllGears = async () => {
+  const cookie = cookies();
+
+  const accessToken = (await cookie).get("accessToken")?.value;
+
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/gears`, {
+    headers: {
+      method: "GET",
+      "Content-Type": "application/json",
+      Authorization: `${accessToken}`,
+    },
+  });
+
+  const result = res.json();
+
+  return result;
+};

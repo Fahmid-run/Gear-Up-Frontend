@@ -6,7 +6,7 @@ const GearPage = async () => {
 
   return (
     <div className="flex min-h-svh flex-col bg-muted p-6 md:p-10">
-      <GearList gearList={gearItems.data}></GearList>
+      <GearList userRole="Provider" gearList={gearItems.data}></GearList>
     </div>
   );
 };
