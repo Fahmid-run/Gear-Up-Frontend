@@ -4,9 +4,8 @@ import React from "react";
 
 const PaymentPage = async () => {
   const res = await getPaymentList();
-  console.log(res);
   return (
-    <div>
+    <div className="flex min-h-svh flex-col bg-muted p-6 md:p-10">
       <PaymentTable payments={res.data}></PaymentTable>
     </div>
   );

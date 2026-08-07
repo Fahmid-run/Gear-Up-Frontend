@@ -90,11 +90,11 @@ export function Sidebar() {
       label: "Payments",
       href: "/dashboard/admin/payments",
     },
-    {
-      icon: <Star className="w-5 h-5" />,
-      label: "Reviews",
-      href: "/dashboard/reviews",
-    },
+    // {
+    //   icon: <Star className="w-5 h-5" />,
+    //   label: "Reviews",
+    //   href: "/dashboard/reviews",
+    // },
     {
       icon: <User className="w-5 h-5" />,
       label: "Profile",

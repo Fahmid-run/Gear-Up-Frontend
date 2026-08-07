@@ -79,13 +79,13 @@ export function Sidebar() {
     {
       icon: <CreditCard className="w-5 h-5" />,
       label: "Payments",
-      href: "/dashboard/payments",
+      href: "/dashboard/provider/payments",
     },
-    {
-      icon: <Star className="w-5 h-5" />,
-      label: "Reviews",
-      href: "/dashboard/reviews",
-    },
+    // {
+    //   icon: <Star className="w-5 h-5" />,
+    //   label: "Reviews",
+    //   href: "/dashboard/reviews",
+    // },
     {
       icon: <User className="w-5 h-5" />,
       label: "Profile",
