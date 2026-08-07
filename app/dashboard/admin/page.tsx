@@ -1,6 +1,6 @@
 import { DashboardMetrics } from "@/components/blocks/admin-dashboard-metrics";
 import { UserManagement } from "@/components/blocks/user-management";
-import { getAllUser } from "@/service/adminService";
+import { getAllUser, getStates } from "@/service/adminService";
 
 interface DashboardMetricss {
   totalCustomers: number;
@@ -48,6 +48,8 @@ const mockDashboardMetrics: DashboardMetricss = {
 export default async function AdminPanel() {
   const userData = await getAllUser();
 
+  const getState = await getStates();
+
   return (
     <div className="space-y-8 px-6 py-10">
       {/* Header */}
@@ -59,7 +61,7 @@ export default async function AdminPanel() {
       </div>
 
       {/* Metrics */}
-      <DashboardMetrics metrics={mockDashboardMetrics} />
+      <DashboardMetrics metrics={getState.data} />
 
       {/* Customer Management */}
       <UserManagement users={userData.data} />

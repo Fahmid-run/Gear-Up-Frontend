@@ -138,7 +138,21 @@ export function RentalOrdersTable({
                   </div>
                 </TableCell>
                 <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
-                  {order.startDate} &ndash; {order.endDate}
+                  {new Date(order.startDate).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: "UTC",
+                  })}{" "}
+                  &ndash;{" "}
+                  {new Date(order.endDate).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: "UTC",
+                  })}
                 </TableCell>
                 <TableCell>
                   <Badge

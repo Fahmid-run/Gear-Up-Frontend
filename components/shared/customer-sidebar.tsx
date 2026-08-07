@@ -70,7 +70,7 @@ export function Sidebar() {
     {
       icon: <LayoutDashboard className="w-5 h-5" />,
       label: "Overview",
-      href: "/dashboard",
+      href: "/dashboard/customer",
     },
 
     {
