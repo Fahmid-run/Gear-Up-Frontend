@@ -23,7 +23,9 @@ import { gearAction } from "@/app/dashboard/provider/gear/_actions/gearAction";
 export default function ComplexForm() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -32,8 +34,6 @@ export default function ComplexForm() {
       };
       reader.readAsDataURL(file);
     }
-
-    console.log(file);
   };
 
   const [state, action, pending] = useActionState(gearAction, false);
