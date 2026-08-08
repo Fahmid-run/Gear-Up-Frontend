@@ -32,7 +32,7 @@ export function GearManagement({
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   // Filter gears based on search query
   const filteredGears = useMemo(() => {

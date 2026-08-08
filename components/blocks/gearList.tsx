@@ -69,8 +69,13 @@ export function GearList({
                   <div className="flex items-center gap-3">
                     <div className="relative size-11 shrink-0 overflow-hidden rounded-lg border bg-muted">
                       <Image
-                        src={"/placeholder.svg"}
-                        alt={gear.name}
+                        src={
+                          gear.image?.startsWith("/")
+                            ? gear.image
+                            : `/${gear.image}`
+                        }
+                        alt={gear.name || "Gear preview"}
+                        
                         fill
                         sizes="44px"
                         className="object-cover"

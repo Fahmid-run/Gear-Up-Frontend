@@ -234,6 +234,7 @@ export default function ComplexForm() {
                       <Input
                         id="image-upload"
                         type="file"
+                        name="image"
                         className="hidden"
                         accept="image/*"
                         onChange={handleImageUpload}
