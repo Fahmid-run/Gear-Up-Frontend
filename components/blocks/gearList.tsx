@@ -68,17 +68,15 @@ export function GearList({
                 <TableCell className="pl-6">
                   <div className="flex items-center gap-3">
                     <div className="relative size-11 shrink-0 overflow-hidden rounded-lg border bg-muted">
-                      <Image
+                      <img
                         src={
                           gear.image?.startsWith("/")
                             ? gear.image
                             : `/${gear.image}`
                         }
                         alt={gear.name || "Gear preview"}
-                        
-                        fill
-                        sizes="44px"
-                        className="object-cover"
+                        // sizes="44px"
+                        className="object-cover size-11"
                       />
                     </div>
                     <div className="min-w-0">

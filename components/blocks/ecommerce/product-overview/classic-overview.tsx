@@ -1,16 +1,7 @@
 import { Button } from "@/components/ui/button";
-import {
-  Star,
-  Truck,
-  ShieldCheck,
-  Heart,
-  Trash2,
-  Minus,
-  Plus,
-} from "lucide-react";
+import { Star, Truck, Heart } from "lucide-react";
 import { RentalBookingWidget } from "../../rentalBooking-widget";
 import { getGearById } from "@/app/gear/_actions/gearAction";
-import { Card, CardContent } from "@/components/ui/card";
 
 export default async function ClassicOverview({ id }: { id: string }) {
   let gearData = null;
@@ -20,80 +11,10 @@ export default async function ClassicOverview({ id }: { id: string }) {
 
   const data = gearData.data;
 
-  const items = [
-    {
-      id: "1",
-      name: "Classic Chronograph Watch",
-      price: 299.99,
-      originalPrice: 399.99,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-      color: "Black",
-      size: "Standard",
-      stock: 5,
-    },
-    {
-      id: "2",
-      name: "Sport Diver Watch",
-      price: 199.99,
-      quantity: 2,
-      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-      color: "Blue",
-      size: "Standard",
-      stock: 3,
-    },
-  ];
-
-  // const [shippingMethod, setShippingMethod] = useState<string>("standard");
-
-  const shippingMethods = [
-    {
-      id: "standard",
-      name: "Standard Shipping",
-      price: 5.99,
-      estimatedDays: "3-5 days",
-      description: "Free shipping on orders over $200",
-    },
-    {
-      id: "express",
-      name: "Express Shipping",
-      price: 12.99,
-      estimatedDays: "1-2 days",
-      description: "Priority delivery with tracking",
-    },
-  ];
-
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-  // const shipping =
-  //   shippingMethods.find((m) => m.id === shippingMethod)?.price || 0;
-  // const total = subtotal + shipping;
-
-  // const updateQuantity = (id: string, change: number) => {
-  //   setItems((prev) =>
-  //     prev.map((item) => {
-  //       if (item.id === id) {
-  //         const newQuantity = Math.max(
-  //           1,
-  //           Math.min(item.stock, item.quantity + change),
-  //         );
-  //         return { ...item, quantity: newQuantity };
-  //       }
-  //       return item;
-  //     }),
-  //   );
-  // };
-
-  // const removeItem = (id: string) => {
-  //   setItems((prev) => prev.filter((item) => item.id !== id));
-  // };
   return (
     <>
       <div className="mx-auto w-full max-w-7xl p-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {/* Product Image */}
           <div className="bg-muted relative aspect-square overflow-hidden rounded-lg">
             <img
               src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
@@ -119,9 +40,6 @@ export default async function ClassicOverview({ id }: { id: string }) {
               <div className="flex items-center gap-1">
                 <Star className="fill-primary text-primary h-4 w-4" />
                 <span className="text-sm font-medium">4.9</span>
-                {/* <span className="text-muted-foreground text-sm">
-                (128 reviews)
-              </span> */}
               </div>
             </div>
 

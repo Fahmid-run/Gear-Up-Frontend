@@ -18,23 +18,14 @@ interface Gear {
 
 interface GearManagementProps {
   gears: Gear[];
-  // onDelete: (id: string) => void;
-  // onEdit: (id: string) => void;
-  // onUpdate: (id: string, updates: Partial<Gear>) => void;
 }
 
-export function GearManagement({
-  gears,
-  // onDelete,
-  // onEdit,
-  // onUpdate,
-}: GearManagementProps) {
+export function GearManagement({ gears }: GearManagementProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const itemsPerPage = 5;
 
-  // Filter gears based on search query
   const filteredGears = useMemo(() => {
     if (!searchQuery.trim()) return gears;
 
@@ -42,12 +33,10 @@ export function GearManagement({
     return gears.filter(
       (gear) =>
         gear.name.toLowerCase().includes(query) ||
-        // gear.category.toLowerCase().includes(query) ||
         gear.availability.toLowerCase().includes(query),
     );
   }, [gears, searchQuery]);
 
-  // Calculate pagination
   const totalPages = Math.ceil(filteredGears.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedGears = filteredGears.slice(
@@ -55,13 +44,7 @@ export function GearManagement({
     startIndex + itemsPerPage,
   );
 
-  const handleDelete = (id: string) => {
-    setDeletingId(id);
-    setTimeout(() => {
-      // onDelete(id);
-      setDeletingId(null);
-    }, 500);
-  };
+  const handleDelete = (id: string) => {};
 
   const tableColumns = [
     {
@@ -72,7 +55,6 @@ export function GearManagement({
           <div className="h-10 w-10 rounded-lg bg-slate-200" />
           <div>
             <p className="font-medium text-slate-900">{gear.name}</p>
-            {/* <p className="text-sm text-slate-500">{gear.category}</p> */}
           </div>
         </div>
       ),
@@ -143,10 +125,8 @@ export function GearManagement({
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {/* Data Table */}
         <DataTable columns={tableColumns} data={paginatedGears} />
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between border-t border-slate-200 pt-6">
             <div className="text-sm text-slate-600">
@@ -189,7 +169,6 @@ export function GearManagement({
           </div>
         )}
 
-        {/* Empty State */}
         {paginatedGears.length === 0 && (
           <div className="flex flex-col items-center justify-center py-12">
             <Package className="h-12 w-12 text-slate-300" />

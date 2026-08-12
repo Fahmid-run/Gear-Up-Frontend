@@ -25,12 +25,7 @@ export default async function ProviderDashboard() {
         <OverviewSection stats={stats.data} />
 
         {/* Gear Management Section */}
-        <GearManagement
-          gears={gears.data}
-          // onDelete={handleDelete}
-          // onEdit={handleEdit}
-          // onUpdate={handleUpdate}
-        />
+        <GearManagement gears={gears.data} />
       </div>
     </main>
   );
