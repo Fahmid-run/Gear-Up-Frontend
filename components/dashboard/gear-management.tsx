@@ -44,7 +44,9 @@ export function GearManagement({ gears }: GearManagementProps) {
     startIndex + itemsPerPage,
   );
 
-  const handleDelete = (id: string) => {};
+  const handleDelete = async (id: string) => {
+    const deleteGearItem = await deleteGear(id);
+  };
 
   const tableColumns = [
     {
@@ -186,3 +188,4 @@ export function GearManagement({ gears }: GearManagementProps) {
 }
 
 import { Package } from "lucide-react";
+import { deleteGear } from "@/service/providerService";

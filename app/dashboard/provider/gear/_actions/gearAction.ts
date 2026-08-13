@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import { gearSchema } from "../_schema/gearschema";
 import path from "path";
 import { mkdir, writeFile } from "fs/promises";
+import { verfiyToken } from "@/app/utils/jwt";
+import { configs } from "@/app/utils/configs";
 
 export const gearAction = async (prevState: any, formData: FormData) => {
   const cookie = cookies();
@@ -11,6 +13,7 @@ export const gearAction = async (prevState: any, formData: FormData) => {
   const accessToken = (await cookie).get("accessToken")?.value;
 
   const file = formData.get("image") as File | null;
+
   let imagePath = "";
 
   if (file && file.size > 0) {
@@ -58,8 +61,6 @@ export const gearAction = async (prevState: any, formData: FormData) => {
   });
 
   const result = await res.json();
-
-  console.log(result);
 
   return result;
 };

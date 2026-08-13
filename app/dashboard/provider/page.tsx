@@ -6,6 +6,8 @@ import { providerOverviewStats } from "@/service/providerService";
 export default async function ProviderDashboard() {
   const stats = await providerOverviewStats();
 
+  console.log(stats);
+
   const gears = await getMyGear();
 
   return (
