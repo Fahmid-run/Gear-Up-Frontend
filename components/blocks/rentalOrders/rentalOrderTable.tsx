@@ -71,6 +71,7 @@ export function RentalOrdersTable({
       });
     }
   };
+
   const updateRentalStatus = async (
     orderId: string,
     status: "CONFIRMED" | "PICKED_UP" | "RETURNED",
@@ -117,7 +118,7 @@ export function RentalOrdersTable({
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className="pl-6">Order</TableHead>
+              <TableHead className="pl-6">Order ID</TableHead>
               <TableHead>Dates</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Total</TableHead>
@@ -132,7 +133,6 @@ export function RentalOrdersTable({
                 <TableCell className="pl-6">
                   <div className="flex items-center gap-3">
                     <div className="min-w-0">
-                      <p className="truncate font-medium leading-tight">test</p>
                       <p className="text-sm text-muted-foreground">
                         {order.id}
                       </p>

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export function PaymentSuccessPage({ payload }: { payload: any }) {
   const formattedAmount = new Intl.NumberFormat("en-US", {
@@ -76,7 +77,7 @@ export function PaymentSuccessPage({ payload }: { payload: any }) {
           {/* Action Buttons */}
           <div className="space-y-3">
             <Link href="/dashboard/customer/order" className="block">
-              <Button className="w-full" size="lg">
+              <Button className="w-full" size="lg" onClick={() => {}}>
                 View My Orders
               </Button>
             </Link>
@@ -86,11 +87,6 @@ export function PaymentSuccessPage({ payload }: { payload: any }) {
               </Button>
             </Link>
           </div>
-
-          {/* Additional Info */}
-          <p className="text-xs text-muted-foreground text-center mt-6">
-            A confirmation email has been sent to your registered email address.
-          </p>
         </div>
       </div>
     </div>
