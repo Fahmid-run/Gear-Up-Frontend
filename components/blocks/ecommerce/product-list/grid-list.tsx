@@ -1,4 +1,5 @@
 import { getGears } from "@/app/gear/_actions/gearAction";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heart, Star } from "lucide-react";
 import Link from "next/link";
@@ -44,6 +45,13 @@ export default async function GridList() {
                   </div>
                   <div className="text-right">
                     <div className="font-medium">${data.rentalPricePerDay}</div>
+                    {data.availability === "AVAILABLE" ? (
+                      <Badge variant={"secondary"} className="bg-green-100">
+                        {data.availability}
+                      </Badge>
+                    ) : (
+                      <Badge variant={"destructive"}>{data.availability}</Badge>
+                    )}
                   </div>
                 </div>
                 <div className="mt-4 ">
