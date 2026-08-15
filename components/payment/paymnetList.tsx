@@ -18,6 +18,7 @@ import {
   getSinglePayments,
   paymentInitialization,
 } from "@/service/paymentService";
+import { CreditCard } from "lucide-react";
 
 type PaymentStatus = "PENDING" | "SUCCESS" | "FAILED" | "REFUNDED";
 
@@ -128,6 +129,14 @@ export function PaymentTable({
             ))}
           </TableBody>
         </Table>
+        {payments?.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-12 ">
+            <CreditCard className="h-12 w-12 text-slate-300" />
+            <p className="mt-4 text-lg text-slate-600">
+              No Payment Details found
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

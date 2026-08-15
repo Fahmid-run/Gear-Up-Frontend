@@ -17,8 +17,7 @@ export default async function ClassicOverview({ id }: { id: string }) {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div className="bg-muted relative aspect-square overflow-hidden rounded-lg">
             <img
-              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-              alt="Modern watch with leather strap"
+              src={data.image}
               className="h-full w-full object-cover"
               width={800}
               height={800}
@@ -50,12 +49,14 @@ export default async function ClassicOverview({ id }: { id: string }) {
               </span>
             </div>
 
-            <p className="text-muted-foreground mb-6">{data.description}</p>
+            <p className=" text-sm font-light text-muted-foreground mb-6">
+              {data.description}
+            </p>
 
             <div className="mb-8 grid grid-cols-2 gap-4">
               <div className="flex items-center gap-2 text-sm">
                 <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                <span>{data.availability}</span>
+                <span>{data.availability.toLowerCase()}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Truck className="h-4 w-4" />

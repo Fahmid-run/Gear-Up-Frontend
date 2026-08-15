@@ -7,18 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Star } from "lucide-react";
-import {
-  ReviewFormState,
-  submitReview,
-} from "@/app/dashboard/customer/review/_actions/reviewAction";
+import { submitReview } from "@/app/dashboard/customer/review/_actions/reviewAction";
 import { useParams } from "next/navigation";
 
 export function ReviewForm() {
   const [rating, setRating] = useState<number | null>(null);
-  const [state, formAction, isPending] = useActionState<ReviewFormState>(
-    submitReview,
-    false,
-  );
+  const [state, formAction, isPending] = useActionState(submitReview, false);
 
   const { id } = useParams();
 

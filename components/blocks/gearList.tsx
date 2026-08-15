@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
+import { Package } from "lucide-react";
 
 type GearStatus =
   | "PLACED"
@@ -128,6 +129,13 @@ export function GearList({
               </TableRow>
             ))}
           </TableBody>
+
+          {gearList?.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-12 ">
+              <Package className="h-12 w-12 text-slate-300" />
+              <p className="mt-4 text-lg text-slate-600">No gears found</p>
+            </div>
+          )}
         </Table>
       </div>
     </section>

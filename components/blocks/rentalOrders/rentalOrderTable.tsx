@@ -17,6 +17,7 @@ import { toast } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 import { paymentInitialization } from "@/service/paymentService";
 import { createReview } from "@/service/review";
+import { ShoppingBagIcon } from "lucide-react";
 
 type RentalStatus =
   | "PLACED"
@@ -237,6 +238,12 @@ export function RentalOrdersTable({
             ))}
           </TableBody>
         </Table>
+        {orders?.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-12 ">
+            <ShoppingBagIcon className="h-12 w-12 text-slate-300" />
+            <p className="mt-4 text-lg text-slate-600">No gears found</p>
+          </div>
+        )}
       </div>
     </section>
   );

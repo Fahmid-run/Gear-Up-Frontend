@@ -49,8 +49,9 @@ export const deleteGear = async (gearId: string) => {
   const res = await fetch(
     `${process.env.BACKEND_API_URL}/api/provider/gear/${gearId}`,
     {
+      method: "DELETE",
+
       headers: {
-        method: "DELETE",
         Authorization: `${accessToken}`,
       },
     },

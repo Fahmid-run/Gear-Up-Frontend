@@ -1,5 +1,8 @@
 "use client";
 
+import { Package } from "lucide-react";
+import { deleteGear } from "@/service/providerService";
+
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Search, Trash2, Edit2, CheckCircle } from "lucide-react";
 import { DataTable } from "./data-table";
 import { StatusBadge } from "./status-badge";
+import { useRouter } from "next/navigation";
+import { toast } from "../ui/toast";
 
 interface Gear {
   id: string;
@@ -25,6 +30,8 @@ export function GearManagement({ gears }: GearManagementProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const itemsPerPage = 5;
+
+  const router = useRouter();
 
   const filteredGears = useMemo(() => {
     if (!searchQuery.trim()) return gears;
@@ -45,7 +52,29 @@ export function GearManagement({ gears }: GearManagementProps) {
   );
 
   const handleDelete = async (id: string) => {
-    const deleteGearItem = await deleteGear(id);
+    try {
+      const res = await deleteGear(id);
+
+      if (res.success) {
+        toast.add({
+          type: "success",
+          description: "Gear Deleted",
+        });
+
+        router.refresh();
+      }
+
+      if (!res.success) {
+        toast.add({
+          type: "error",
+          description: res.message,
+        });
+
+        router.refresh();
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const tableColumns = [
@@ -186,6 +215,3 @@ export function GearManagement({ gears }: GearManagementProps) {
     </Card>
   );
 }
-
-import { Package } from "lucide-react";
-import { deleteGear } from "@/service/providerService";
