@@ -16,9 +16,6 @@ export default async function CustomerDashboard() {
 
         {/* Overview Section */}
         <CustomerOverviewSection stats={stats.data} />
-
-        {/* Rentals List Section */}
-        {/* <RentalsList rentals={rentals} /> */}
       </div>
     </main>
   );

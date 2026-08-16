@@ -13,7 +13,9 @@ import {
   Edit2,
   LayoutDashboard,
   Trash2,
+  HomeIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 interface ProfileProps {
   profilePicture?: string;
@@ -76,7 +78,7 @@ export function ProfileComponent({
     <div className="w-full max-w-md mx-auto">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header Background */}
-        <div className="h-32 bg-gradient-to-r from-green-500 to-green-800" />
+        <div className="h-32 bg-gradient-to-r from-primary to-secondary-foreground" />
 
         {/* Profile Content */}
         <div className="px-6 pb-6">
@@ -147,24 +149,26 @@ export function ProfileComponent({
 
           {/* Action Buttons */}
           <div className="grid grid-cols-1 gap-3">
-            <Button
+            {/* <Button
               onClick={onUpdate}
               className="w-full bg-primary text-white flex items-center justify-center gap-2"
             >
               <Edit2 className="w-4 h-4" />
               Update Profile
-            </Button>
+            </Button> */}
 
-            <Button
-              onClick={onDashboard}
-              variant="outline"
-              className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 flex items-center justify-center gap-2"
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              Dashboard
-            </Button>
+            <Link href={"/"}>
+              <Button
+                onClick={onDashboard}
+                variant="outline"
+                className="w-full border-primary text-primary hover:bg-secondary flex items-center justify-center gap-2"
+              >
+                <HomeIcon className="w-4 h-4" />
+                Home
+              </Button>
+            </Link>
 
-            <Button
+            {/* <Button
               onClick={handleDelete}
               disabled={isDeleting}
               variant="destructive"
@@ -172,7 +176,7 @@ export function ProfileComponent({
             >
               <Trash2 className="w-4 h-4" />
               {isDeleting ? "Deleting..." : "Delete Profile"}
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

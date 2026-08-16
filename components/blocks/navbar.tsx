@@ -87,7 +87,7 @@ export function SiteNavbar({ user }: { user: any }) {
               <DropdownMenuGroup>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem render={<Link href="/" />}>
+                <DropdownMenuItem render={<Link href="/account/profile" />}>
                   <UserCircle className="size-4" />
                   My Profile
                 </DropdownMenuItem>

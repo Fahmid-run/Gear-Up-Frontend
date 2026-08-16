@@ -12,6 +12,7 @@ import { DataTable } from "./data-table";
 import { StatusBadge } from "./status-badge";
 import { useRouter } from "next/navigation";
 import { toast } from "../ui/toast";
+import Link from "next/link";
 
 interface Gear {
   id: string;
@@ -113,14 +114,15 @@ export function GearManagement({ gears }: GearManagementProps) {
       label: "Actions",
       render: (gear: Gear) => (
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            // onClick={() => onEdit(gear.id)}
-            className="text-blue-600 hover:bg-blue-50"
-          >
-            <Edit2 className="h-4 w-4" />
-          </Button>
+          <Link href={`/dashboard/provider/gear/${gear.id}/edit`}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-blue-600 hover:bg-blue-50"
+            >
+              <Edit2 className="h-4 w-4" />
+            </Button>
+          </Link>
           <Button
             variant="ghost"
             size="sm"

@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { paymentInitialization } from "@/service/paymentService";
 import { createReview } from "@/service/review";
 import { ShoppingBagIcon } from "lucide-react";
+import Link from "next/link";
 
 type RentalStatus =
   | "PLACED"
@@ -213,11 +214,11 @@ export function RentalOrdersTable({
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() =>
+                        onClick={() => {
                           router.push(
                             `/dashboard/customer/review/${order.items[0].gearItemId}`,
-                          )
-                        }
+                          );
+                        }}
                       >
                         Leave Review
                       </Button>

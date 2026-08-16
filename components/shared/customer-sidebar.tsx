@@ -83,6 +83,11 @@ export function Sidebar() {
       label: "Payments",
       href: "/dashboard/customer/payments",
     },
+    {
+      icon: <User className="w-5 h-5" />,
+      label: "Profile",
+      href: "/account/profile",
+    },
   ];
 
   const router = useRouter();

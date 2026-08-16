@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { gearEditAction } from "@/app/dashboard/provider/gear/_actions/gearAction";
 import { toast } from "./ui/toast";
+import Link from "next/link";
 
 type GearCategory = {
   category: string;
@@ -406,10 +407,11 @@ export default function GearEdit({ data }: GearEditProps) {
             <Separator />
 
             <div className="flex justify-end gap-4">
-              <Button type="button" variant="outline" disabled={pending}>
-                Cancel
-              </Button>
-
+              <Link href={"/"}>
+                <Button type="button" variant="outline" disabled={pending}>
+                  Cancel
+                </Button>
+              </Link>
               <Button type="submit" disabled={pending}>
                 {pending ? "Updating..." : "Update Gear"}
               </Button>

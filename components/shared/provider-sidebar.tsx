@@ -89,7 +89,7 @@ export function Sidebar() {
     {
       icon: <User className="w-5 h-5" />,
       label: "Profile",
-      href: "/dashboard/profile",
+      href: "/account/profile",
     },
   ];
   const handleLogout = () => {
