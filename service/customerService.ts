@@ -8,8 +8,8 @@ export const getCustomerStates = async () => {
   const accessToken = (await cookie).get("accessToken")?.value;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/customer/stats`, {
+    method: "POST",
     headers: {
-      method: "GET",
       Authorization: `${accessToken}`,
     },
   });
