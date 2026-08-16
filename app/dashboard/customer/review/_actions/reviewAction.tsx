@@ -11,7 +11,9 @@ const reviewSchema = z.object({
     .min(1, "Review is required")
     .min(10, "Review must be at least 10 characters"),
   rating: z.coerce
-    .number({ invalid_type_error: "Rating must be a number" })
+    .number({
+      error: "Rating must be a number",
+    })
     .int("Rating must be an integer")
     .min(1, "Rating must be between 1 and 5")
     .max(5, "Rating must be between 1 and 5"),
