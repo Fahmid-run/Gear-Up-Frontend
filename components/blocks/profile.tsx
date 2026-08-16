@@ -38,16 +38,9 @@ export function ProfileComponent({
   phone,
   address,
   status,
-  onUpdate,
   onDashboard,
-  onDelete,
 }: ProfileProps) {
   const [isDeleting, setIsDeleting] = useState(false);
-
-  const handleDelete = () => {
-    setIsDeleting(true);
-    onDelete?.();
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {

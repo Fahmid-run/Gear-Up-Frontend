@@ -103,11 +103,6 @@ export function GearManagement({ gears }: GearManagementProps) {
       label: "Status",
       render: (gear: Gear) => <StatusBadge status={gear.availability} />,
     },
-    {
-      key: "rentals",
-      label: "Total Rentals",
-      render: (gear: Gear) => <span className="text-slate-900">rentals</span>,
-    },
 
     {
       key: "actions",
