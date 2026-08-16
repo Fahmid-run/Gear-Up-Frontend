@@ -7,6 +7,7 @@ interface Stats {
   totalGearItems: number;
   totalPayments: number;
   totalRentals: number;
+  avrRating: number;
 }
 
 interface OverviewSectionProps {
@@ -44,7 +45,7 @@ export function OverviewSection({ stats }: OverviewSectionProps) {
     },
     {
       title: "Average Rating",
-      value: 12,
+      value: stats.avrRating || 0,
       icon: Star,
       bgColor: "bg-amber-50",
       iconColor: "text-amber-600",

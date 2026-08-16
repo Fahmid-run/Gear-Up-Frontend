@@ -10,8 +10,8 @@ export const providerOverviewStats = async () => {
   const accessToken = (await cookieStore).get("accessToken")?.value;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/provider/stats`, {
+    method: "GET",
     headers: {
-      method: "GET",
       Authorization: `${accessToken}`,
     },
   });

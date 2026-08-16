@@ -1,7 +1,7 @@
 import { getGears } from "@/app/gear/_actions/gearAction";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Heart, Star } from "lucide-react";
+import { Heart, Package, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,8 +9,8 @@ export default async function GridList() {
   const data = await getGears();
 
   return (
-    <div className="mx-auto w-full max-w-7xl p-6">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="mx-auto w-full max-w-7xl p-6 ">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-scren">
         {data.data?.map((data: any, i: number) => (
           <Link href={`/gear/${data.id}`}>
             <div
@@ -65,6 +65,12 @@ export default async function GridList() {
           </Link>
         ))}
       </div>
+      {data.data?.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-12">
+          <Package className="h-12 w-12 text-slate-300" />
+          <p className="mt-4 text-lg text-slate-600">No gears found</p>
+        </div>
+      )}
     </div>
   );
 }
