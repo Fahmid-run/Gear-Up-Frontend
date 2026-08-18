@@ -140,9 +140,7 @@ export default async function GearReviewsPage({ params }) {
   const gearReviews = await getReviews(id);
   const gearData = await getGearItemById(id);
 
-
-
-  const  = await getUser();
+  // const  = await getUser();
 
   console.log(gearReviews.data);
   console.log(gearData.data);
