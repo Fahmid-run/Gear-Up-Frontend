@@ -8,6 +8,8 @@ import Link from "next/link";
 export default async function GridList() {
   const data = await getGears();
 
+  console.log(data);
+
   return (
     <div className="mx-auto w-full max-w-7xl p-6 ">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-scren">
@@ -58,6 +60,9 @@ export default async function GridList() {
                 <div className="mt-4 ">
                   <Button size="sm" className="w-full">
                     <Link href={`/gear/${data.id}`}>Rent Now</Link>
+                  </Button>
+                  <Button size="sm" className="w-full">
+                    <Link href={`/gear/reviews/${data.id}`}>Reviews</Link>
                   </Button>
                 </div>
               </div>

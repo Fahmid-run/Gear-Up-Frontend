@@ -2,7 +2,6 @@
 
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-import { success } from "zod";
 
 export const getMe = async () => {
   const cookie = cookies();
@@ -25,6 +24,31 @@ export const getMe = async () => {
       tags: ["myProfile"],
     },
   });
+
+  const result = res.json();
+
+  return result;
+};
+
+export const getUser = async (id: string) => {
+  const cookie = cookies();
+
+  const accessToken = (await cookie).get("accessToken")?.value;
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Forbidden",
+    };
+  }
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/auth/user/${id}`,
+    {
+      headers: {
+        Authorization: `${accessToken}`,
+      },
+    },
+  );
 
   const result = res.json();
 

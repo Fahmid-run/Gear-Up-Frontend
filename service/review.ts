@@ -31,24 +31,19 @@ export const createReview = async (payload: {
   }
 };
 
-export const getReviews = async (payload: {
-  gearItemId: string;
-  rating: number;
-  review: string;
-}) => {
+export const getReviews = async (gearItemId: string) => {
   try {
     const cookie = cookies();
     const accessToken = (await cookie).get("accessToken")?.value;
 
     const res = await fetch(
-      `${process.env.BACKEND_API_URL}/api/reviews/${payload.gearItemId}`,
+      `${process.env.BACKEND_API_URL}/api/reviews/${gearItemId}`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `${accessToken}`,
         },
-        body: JSON.stringify(payload),
       },
     );
 

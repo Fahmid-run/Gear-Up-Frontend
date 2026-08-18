@@ -58,6 +58,8 @@ export async function proxy(request: NextRequest) {
     }
   }
 
+  console.log(userRole);
+
   const isPublic = public_routes.includes(pathname);
   const isAuthRoute = authRoutes.includes(pathname);
 

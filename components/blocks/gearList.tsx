@@ -6,9 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 import { Package, Trash2 } from "lucide-react";
-import { deleteGear } from "@/service/providerService";
-import { toast } from "../ui/toast";
-import { useState } from "react";
 
 type GearStatus =
   | "PLACED"
@@ -39,8 +36,6 @@ const statusLabels: Record<GearStatus, string> = {
 export function GearList({
   gearList,
   userRole,
-  onViewAll,
-  onViewDetails,
 }: {
   gearList?: any[];
   userRole: "Provider" | "Admin";
@@ -49,33 +44,6 @@ export function GearList({
 }) {
   const router = useRouter();
 
-  // const [deletingId, setDeletingId] = useState<string | null>(null);
-
-  // const handleDelete = async (id: string) => {
-  //   try {
-  //     const res = await deleteGear(id);
-
-  //     if (res.success) {
-  //       toast.add({
-  //         type: "success",
-  //         description: "Gear Deleted",
-  //       });
-
-  //       router.refresh();
-  //     }
-
-  //     if (!res.success) {
-  //       toast.add({
-  //         type: "error",
-  //         description: res.message,
-  //       });
-
-  //       router.refresh();
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
   return (
     <section className="w-full rounded-xl border bg-card text-card-foreground shadow-sm">
       <header className="flex items-center justify-between gap-4 px-6 py-4">

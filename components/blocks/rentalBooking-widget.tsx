@@ -195,7 +195,7 @@ export function RentalBookingWidget({
 
           <div className="flex flex-col gap-3">
             <Button
-              className="w-full bg-green-700 text-white hover:bg-green-800"
+              className="w-full bg-primary text-white hover:bg-scondary"
               disabled={days === 0 || isLoading}
               onClick={handleRentalBooking}
             >

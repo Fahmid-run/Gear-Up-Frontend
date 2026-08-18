@@ -19,7 +19,7 @@ export function ReviewForm() {
   return (
     <form
       action={formAction}
-      className="w-full max-w-md space-y-6 border-2 p-10 rounded-2xl"
+      className="w-full max-w-md space-y-6 border-2 p-10 rounded-2xl bg-white"
     >
       {/* Success Message */}
       {state?.success && (

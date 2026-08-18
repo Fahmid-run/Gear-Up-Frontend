@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Search, Star } from "lucide-react";
 import {
   Card,
@@ -113,21 +114,17 @@ function Rating({ value }: { value: number }) {
   );
 }
 
-export function ReviewsPage() {
+export function ReviewsPage({ gears, review }) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const pageSize = 4;
 
   const filteredReviews = useMemo(() => {
     const normalized = query.toLowerCase().trim();
-    return reviews.filter((review) =>
-      [
-        review.gearId,
-        review.gearName,
-        review.providerName,
-        review.reviewerName,
-        review.description,
-      ].some((value) => value.toLowerCase().includes(normalized)),
+    return review.filter((rev) =>
+      [rev.review, rev.rating].some((value) =>
+        value.toLowerCase().includes(normalized),
+      ),
     );
   }, [query]);
 
@@ -184,7 +181,7 @@ export function ReviewsPage() {
         <Card>
           <CardHeader className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <CardTitle>All gear reviews</CardTitle>
+              <CardTitle>Reviews</CardTitle>
               <CardDescription>
                 Review description, rating, gear, and provider details.
               </CardDescription>
@@ -211,21 +208,19 @@ export function ReviewsPage() {
               >
                 <div className="flex min-w-0 flex-1 flex-col gap-3">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <h2 className="font-semibold text-slate-900">
-                      {review.gearName}
-                    </h2>
                     <span className="text-sm text-slate-500">
-                      {review.gearId}
+                      {gears.gearId}
                     </span>
                   </div>
                   <p className="text-sm leading-6 text-slate-600">
-                    {review.description}
+                    {review.review}
                   </p>
                   <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-500">
                     <span>
                       Provider:{" "}
                       <strong className="font-medium text-slate-700">
-                        {review.providerName}
+                        {/* {review.} */}
+                        test
                       </strong>
                     </span>
                     <span>Reviewed by {review.reviewerName}</span>
