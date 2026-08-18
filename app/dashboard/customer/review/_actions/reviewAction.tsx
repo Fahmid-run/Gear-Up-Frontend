@@ -18,6 +18,9 @@ const reviewSchema = z.object({
     .min(1, "Rating must be between 1 and 5")
     .max(5, "Rating must be between 1 and 5"),
 });
+interface CustomJwtPayload {
+  authorId: string;
+}
 
 export type ReviewValues = z.infer<typeof reviewSchema>;
 
@@ -25,13 +28,19 @@ export async function submitReview(
   prevState: any,
   formData: FormData,
 ): Promise<any> {
-  const cookie = cookies();
-  const accessToken = (await cookie).get("accessToken")?.value;
+  const cookie = await cookies();
+  const accessToken = cookie.get("accessToken")?.value;
   const review = formData.get("review");
   const rating = formData.get("rating");
   const gearItemId = formData.get("gearItemId");
 
-  const customerId = jwt.decode(accessToken)?.authorId;
+  if (!accessToken) {
+    throw new Error("Unauthorized: Access token missing");
+  }
+
+  const decoded = jwt.decode(accessToken) as CustomJwtPayload | null;
+
+  const customerId = decoded?.authorId;
 
   const rawData = {
     review,
