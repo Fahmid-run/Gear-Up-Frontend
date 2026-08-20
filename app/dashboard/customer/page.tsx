@@ -3,6 +3,8 @@ import { getCustomerStates } from "@/service/customerService";
 
 export default async function CustomerDashboard() {
   const stats = await getCustomerStates();
+
+  console.log(stats);
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
       <div className="mx-auto max-w-7xl space-y-8">

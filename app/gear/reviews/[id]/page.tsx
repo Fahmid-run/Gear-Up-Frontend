@@ -135,15 +135,15 @@ import { getUser } from "@/service/getMe";
 //   );
 // }
 
-export default async function GearReviewsPage({ params }) {
+export default async function GearReviewsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = await params;
   const gearReviews = await getReviews(id);
   const gearData = await getGearItemById(id);
 
-  // const  = await getUser();
-
-  console.log(gearReviews.data);
-  console.log(gearData.data);
   return (
     <ReviewsPage gears={gearData.data} review={gearReviews.data}></ReviewsPage>
   );

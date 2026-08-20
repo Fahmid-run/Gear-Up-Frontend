@@ -9,7 +9,7 @@ export default async function ProviderDashboard() {
   const gears = await getMyGear();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-3">
+    <main className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 p-3">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header */}
         <div className="space-y-2">

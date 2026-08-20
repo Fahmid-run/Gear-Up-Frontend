@@ -1,8 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
-import { Search, Star } from "lucide-react";
+import { HomeIcon, Search, Star } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -11,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 interface GearReview {
   id: string;
@@ -22,74 +22,6 @@ interface GearReview {
   description: string;
   date: string;
 }
-
-const reviews: GearReview[] = [
-  {
-    id: "REV-1048",
-    gearId: "GEAR-001",
-    gearName: "Mountain Bike Pro",
-    providerName: "Summit Outfitters",
-    reviewerName: "Maya Chen",
-    rating: 5,
-    description:
-      "Excellent bike with smooth gears and responsive brakes. Perfect for the trail ride.",
-    date: "Aug 12, 2026",
-  },
-  {
-    id: "REV-1047",
-    gearId: "GEAR-014",
-    gearName: "Camping Tent 4P",
-    providerName: "Wild North Rentals",
-    reviewerName: "Jordan Lee",
-    rating: 4,
-    description:
-      "Spacious and easy to set up. Kept us dry through a rainy weekend.",
-    date: "Aug 10, 2026",
-  },
-  {
-    id: "REV-1046",
-    gearId: "GEAR-008",
-    gearName: "Kayak Single",
-    providerName: "Coastal Gear Co.",
-    reviewerName: "Avery Brooks",
-    rating: 5,
-    description:
-      "Very stable on the water and lightweight enough to carry alone.",
-    date: "Aug 8, 2026",
-  },
-  {
-    id: "REV-1045",
-    gearId: "GEAR-023",
-    gearName: "Hiking Backpack 60L",
-    providerName: "Trailhead Supply",
-    reviewerName: "Noah Williams",
-    rating: 4,
-    description:
-      "Comfortable straps and plenty of storage for a full-day hike.",
-    date: "Aug 5, 2026",
-  },
-  {
-    id: "REV-1044",
-    gearId: "GEAR-006",
-    gearName: "Rock Climbing Rope",
-    providerName: "Summit Outfitters",
-    reviewerName: "Sofia Patel",
-    rating: 5,
-    description:
-      "High quality rope in great condition. The provider was helpful too.",
-    date: "Aug 2, 2026",
-  },
-  {
-    id: "REV-1043",
-    gearId: "GEAR-031",
-    gearName: "Portable Camp Stove",
-    providerName: "Wild North Rentals",
-    reviewerName: "Liam Carter",
-    rating: 3,
-    description: "Worked reliably, although the ignition took a few tries.",
-    date: "Jul 28, 2026",
-  },
-];
 
 function Rating({ value }: { value: number }) {
   return (
@@ -114,14 +46,14 @@ function Rating({ value }: { value: number }) {
   );
 }
 
-export function ReviewsPage({ gears, review }) {
+export function ReviewsPage({ gears, review }: any) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const pageSize = 4;
 
   const filteredReviews = useMemo(() => {
     const normalized = query.toLowerCase().trim();
-    return review.filter((rev) =>
+    return review.filter((rev: any) =>
       [rev.review, rev.rating].some((value) =>
         value.toLowerCase().includes(normalized),
       ),
@@ -135,28 +67,33 @@ export function ReviewsPage({ gears, review }) {
     currentPage * pageSize,
   );
   const averageRating =
-    reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+    review.reduce((sum: number, review: any) => sum + review.rating, 0) /
+    review.length;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+    <main className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 p-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-8">
         <header className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+          <Link href={"/"}>
+            <div className=" flex flex-row gap-2 items-center">
+              <HomeIcon size={20} className="text-primary"></HomeIcon>
+              <p className="text-lg font-semibold  text-primary">Home</p>
+            </div>
+          </Link>
+          <br />
+          <p className="text-lg font-semibold uppercase tracking-[0.2em] text-primary">
             Gear feedback
           </p>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900">
             Reviews
           </h1>
-          <p className="text-lg text-slate-600">
-            Browse customer feedback across all gear listings.
-          </p>
         </header>
 
         <section className="grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader>
               <CardDescription>Total reviews</CardDescription>
-              <CardTitle className="text-3xl">{reviews.length}</CardTitle>
+              <CardTitle className="text-3xl">{review.length}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
@@ -172,7 +109,7 @@ export function ReviewsPage({ gears, review }) {
             <CardHeader>
               <CardDescription>Five-star reviews</CardDescription>
               <CardTitle className="text-3xl">
-                {reviews.filter((review) => review.rating === 5).length}
+                {review.filter((review: any) => review.rating === 5).length}
               </CardTitle>
             </CardHeader>
           </Card>
@@ -201,7 +138,7 @@ export function ReviewsPage({ gears, review }) {
             </div>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
-            {visibleReviews.map((review) => (
+            {visibleReviews.map((review: any) => (
               <article
                 key={review.id}
                 className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 md:flex-row md:items-start md:justify-between"
@@ -216,20 +153,14 @@ export function ReviewsPage({ gears, review }) {
                     {review.review}
                   </p>
                   <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-500">
-                    <span>
-                      Provider:{" "}
-                      <strong className="font-medium text-slate-700">
-                        {/* {review.} */}
-                        test
-                      </strong>
-                    </span>
-                    <span>Reviewed by {review.reviewerName}</span>
+                    <span>Customer Id : {review.customerId}</span>
                   </div>
                 </div>
                 <div className="flex shrink-0 flex-col gap-2 md:items-end">
                   <Rating value={review.rating} />
                   <span className="text-xs text-slate-500">
-                    {review.date} · {review.id}
+                    {new Date(review.createdAt).toDateString()} /{"      "}
+                    {review.id}
                   </span>
                 </div>
               </article>

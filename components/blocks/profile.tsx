@@ -10,9 +10,6 @@ import {
   Briefcase,
   CheckCircle,
   AlertCircle,
-  Edit2,
-  LayoutDashboard,
-  Trash2,
   HomeIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -71,13 +68,13 @@ export function ProfileComponent({
     <div className="w-full max-w-md mx-auto">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header Background */}
-        <div className="h-32 bg-gradient-to-r from-primary to-secondary-foreground" />
+        <div className="h-32 bg-linear-to-r from-primary to-secondary-foreground" />
 
         {/* Profile Content */}
         <div className="px-6 pb-6">
           {/* Profile Picture */}
           <div className="flex justify-center -mt-16 mb-4">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg bg-white">
               <Image
                 src={"/"}
                 alt={name}
@@ -105,7 +102,7 @@ export function ProfileComponent({
           <div className="space-y-4 mb-6">
             {/* Role */}
             <div className="flex items-start gap-3">
-              <Briefcase className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
+              <Briefcase className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm text-gray-600">Role</p>
                 <p className="text-gray-900 font-medium">{role}</p>
@@ -114,7 +111,7 @@ export function ProfileComponent({
 
             {/* Email */}
             <div className="flex items-start gap-3">
-              <Mail className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
+              <Mail className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm text-gray-600">Email</p>
                 <p className="text-gray-900 font-medium break-all">{email}</p>
@@ -123,7 +120,7 @@ export function ProfileComponent({
 
             {/* Phone */}
             <div className="flex items-start gap-3">
-              <Phone className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
+              <Phone className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm text-gray-600">Phone</p>
                 <p className="text-gray-900 font-medium">{phone}</p>
@@ -132,7 +129,7 @@ export function ProfileComponent({
 
             {/* Address */}
             <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
+              <MapPin className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm text-gray-600">Address</p>
                 <p className="text-gray-900 font-medium">{address}</p>

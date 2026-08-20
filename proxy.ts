@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
 
   if (refreshToken || accessToken) {
     const decodedRefreshToken = refreshToken
-      ? verfiyToken(refreshToken, process.env.JWT_REFRESH_SECRET as string)
+      ? verfiyToken(refreshToken, configs.refreshTokenSecret as string)
       : null;
 
     let decodedAccessToken = accessToken
@@ -44,12 +44,16 @@ export async function proxy(request: NextRequest) {
 
         decodedAccessToken = verfiyToken(
           accessToken!,
-          process.env.JWT_ACCESS_SECRET as string,
+          configs.accessTokenSecret as string,
         );
       }
     }
 
-    if (!decodedAccessToken?.success && !decodedRefreshToken?.success) {
+    if (
+      accessToken &&
+      !decodedAccessToken?.success &&
+      (!decodedRefreshToken || !decodedRefreshToken?.success)
+    ) {
       cookieStore.delete("accessToken");
     }
 
@@ -57,8 +61,6 @@ export async function proxy(request: NextRequest) {
       userRole = (decodedAccessToken?.token as JwtPayload).role;
     }
   }
-
-  console.log(userRole);
 
   const isPublic = public_routes.includes(pathname);
   const isAuthRoute = authRoutes.includes(pathname);

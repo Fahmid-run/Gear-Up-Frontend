@@ -19,7 +19,7 @@ export function CustomerOverviewSection({
   const statCards = [
     {
       title: "Total Spent",
-      value: `$${stats.totalPayments.toLocaleString()}`,
+      value: `$${stats.totalPayments ? stats.totalPayments.toLocaleString() : 0}`,
       icon: CreditCard,
       bgColor: "bg-green-50",
       iconColor: "text-green-600",

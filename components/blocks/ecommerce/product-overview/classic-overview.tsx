@@ -15,22 +15,13 @@ export default async function ClassicOverview({ id }: { id: string }) {
     <>
       <div className="mx-auto w-full max-w-7xl p-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="bg-muted relative aspect-square overflow-hidden rounded-lg">
+          <div className=" relative aspect-square overflow-hidden  bg-white rounded-2xl">
             <img
               src={data.image}
               className="h-full w-full object-cover"
               width={800}
               height={800}
             />
-            <div className="absolute top-4 right-4">
-              <Button
-                size="icon"
-                variant="outline"
-                className="bg-background/80 rounded-full backdrop-blur-sm"
-              >
-                <Heart className="h-5 w-5" />
-              </Button>
-            </div>
           </div>
 
           {/* Product Info */}
