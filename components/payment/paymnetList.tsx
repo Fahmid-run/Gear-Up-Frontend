@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,10 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { toast } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
-import {
-  getSinglePayments,
-  paymentInitialization,
-} from "@/service/paymentService";
+import { getSinglePayments } from "@/service/paymentService";
 import { CreditCard } from "lucide-react";
 
 type PaymentStatus = "PENDING" | "SUCCESS" | "FAILED" | "REFUNDED";
@@ -39,12 +35,10 @@ const statusLabels: Record<PaymentStatus, string> = {
 
 export function PaymentTable({
   payments,
-  onViewAll,
-  onViewDetails,
+  userRole,
 }: {
-  payments?: any[];
-  onViewAll?: () => void;
-  onViewDetails?: (payment: any) => void;
+  payments: any[];
+  userRole: "customer" | "provider" | "admin";
 }) {
   const router = useRouter();
 
@@ -54,6 +48,15 @@ export function PaymentTable({
   ) => {
     if (paymentStatus === "PENDING") {
       const getSinglePayment = await getSinglePayments(paymentId);
+
+      // if (getSinglePayment.success) {
+      //   window.location.href = getSinglePayment.data.checkoutUrl;
+      // } else {
+      //   toast.add({
+      //     type: "warning",
+      //     description: `${getSinglePayment.message}`,
+      //   });
+      // }
     }
   };
   return (
@@ -62,7 +65,6 @@ export function PaymentTable({
         <h2 className="text-lg font-semibold text-balance">Payments</h2>
         <button
           type="button"
-          onClick={onViewAll}
           className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           View all
@@ -104,10 +106,10 @@ export function PaymentTable({
                     variant="secondary"
                     className={cn(
                       "rounded-full font-medium",
-                      statusStyles[payment.status],
+                      statusStyles[payment.status as PaymentStatus],
                     )}
                   >
-                    {statusLabels[payment.status]}
+                    {statusLabels[payment.status as PaymentStatus]}
                   </Badge>
                 </TableCell>
                 <TableCell className="font-medium">
@@ -115,7 +117,7 @@ export function PaymentTable({
                 </TableCell>
                 <TableCell className="font-medium">{payment.paidAt}</TableCell>
 
-                {payment.status !== "SUCCESS" && (
+                {payment.status !== "SUCCESS" && userRole === "customer" && (
                   <TableCell className="font-medium">
                     <Button
                       size="sm"

@@ -9,11 +9,11 @@ export default async function ProviderDashboard() {
   const gears = await getMyGear();
 
   return (
-    <main className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 p-3">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <main className="min-h-screen  bg-linear-to-br from-slate-50 to-slate-100 p-3">
+      <div className="mx-auto  space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-slate-900">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
             Provider Dashboard
           </h1>
           <p className="text-lg text-slate-600">

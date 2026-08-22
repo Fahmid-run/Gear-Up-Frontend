@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import { JwtPayload } from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { verfiyToken } from "./app/utils/jwt";
@@ -6,9 +6,9 @@ import { cookies } from "next/headers";
 import { getNewAcessToken } from "./service/refreshToken";
 import { configs } from "./app/utils/configs";
 
-const authRoutes = ["/login", "/register"];
+const authRoutes = ["/auth/login", "/auth/register"];
 
-const public_routes = ["/", "/login", "/register"];
+const public_routes = ["/", "/auth/login", "/auth/register"];
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -78,7 +78,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!accessToken && !isPublic && !isAuthRoute) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   if (pathname.startsWith("/dashboard/admin") && userRole !== "Admin") {

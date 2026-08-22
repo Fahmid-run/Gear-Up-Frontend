@@ -7,7 +7,7 @@ const PaymentPage = async () => {
 
   return (
     <div className="flex min-h-svh flex-col bg-muted p-6 md:p-10">
-      <PaymentTable payments={res.data}></PaymentTable>
+      <PaymentTable userRole={"provider"} payments={res.data}></PaymentTable>
     </div>
   );
 };

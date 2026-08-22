@@ -123,8 +123,8 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          "bg-background border-r border-border transition-all duration-300 flex flex-col h-screen sticky top-0",
-          "fixed md:relative top-0 left-0 z-40 md:z-0 md:sticky md:top-0",
+          "bg-background border-r border-border transition-all duration-300 flex flex-col h-screen sticky top-0 min-h-screen",
+          "relative top-0 left-0 z-40 md:z-0 md:relative md:top-0",
           isOpen ? "w-64" : "w-20",
         )}
       >
@@ -155,11 +155,11 @@ export function Sidebar() {
                     "flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer",
                     "text-foreground",
                     hoveredLink === link.href
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-primary text-primary-foreground "
                       : "hover:bg-primary hover:text-primary-foreground",
                   )}
                 >
-                  <span className="flex-shrink-0">{link.icon}</span>
+                  <span className="shrink-0 items-start">{link.icon}</span>
                   {isOpen && (
                     <span className="text-sm font-medium truncate">
                       {link.label}

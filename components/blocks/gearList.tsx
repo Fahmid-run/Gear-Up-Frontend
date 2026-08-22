@@ -39,8 +39,6 @@ export function GearList({
 }: {
   gearList?: any[];
   userRole: "Provider" | "Admin";
-  onViewAll?: () => void;
-  onViewDetails?: (gearList: any) => void;
 }) {
   const router = useRouter();
 

@@ -163,10 +163,10 @@ export function RentalOrdersTable({
                     variant="secondary"
                     className={cn(
                       "rounded-full font-medium",
-                      statusStyles[order.rentalStatus],
+                      statusStyles[order.rentalStatus as RentalStatus],
                     )}
                   >
-                    {statusLabels[order.rentalStatus]}
+                    {statusLabels[order.rentalStatus as RentalStatus]}
                   </Badge>
                 </TableCell>
                 <TableCell className="font-medium">

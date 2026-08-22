@@ -24,8 +24,8 @@ export function SiteNavbar({ user }: any) {
       label: "Dashboard",
       href: `/dashboard/${user?.data?.role.toLowerCase()}`,
     },
-    { label: "Register", href: "/register", guestOnly: true },
-    { label: "Login", href: "/login", guestOnly: true },
+    { label: "Register", href: "/auth/register", guestOnly: true },
+    { label: "Login", href: "/auth/login", guestOnly: true },
   ];
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -43,7 +43,7 @@ export function SiteNavbar({ user }: any) {
       type: "success",
       description: "Logout",
     });
-    router.push("/login");
+    router.push("/auth/login");
   };
 
   return (
