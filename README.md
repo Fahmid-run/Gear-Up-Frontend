@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏋️ GearUp — Sports & Outdoor Gear Rental Platform
 
-## Getting Started
+<p align="center">
+  <strong>Rent Sports & Outdoor Gear Instantly</strong>
+</p>
 
-First, run the development server:
+<p align="center">
+  A modern, responsive frontend for a sports and outdoor equipment rental platform.
+  Customers can discover and rent equipment, providers can manage their inventory,
+  and administrators can oversee the entire platform.
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**GearUp** is a modern full-stack rental platform frontend built with **Next.js**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application provides a clean and responsive experience for three different user roles:
 
-## Learn More
+- 👤 **Customer** — Browse gear, select rental dates, place orders, make payments, track rentals, and leave reviews.
+- 🏪 **Provider** — Manage equipment inventory and rental orders.
+- 🛡️ **Admin** — Monitor users, gear, rentals, and overall platform activity.
 
-To learn more about Next.js, take a look at the following resources:
+The frontend communicates with the GearUp backend through REST APIs and provides role-based dashboards with protected routes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Key Features
 
-## Deploy on Vercel
+### 🌎 Public Experience
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 🏠 Modern landing page
+- 🏋️ Browse sports & outdoor equipment
+- 🔎 Search and filtering
+- 🏷️ Category filtering
+- 💰 Price filtering
+- ⭐ Gear ratings
+- 📦 Availability indicators
+- 🖼️ Optimized gear images
+- 📱 Fully responsive design
+- 🌙 Dark/Light mode
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 👤 Customer
+
+- 🔐 Registration & login
+- 👤 Profile management
+- 🏋️ Browse available equipment
+- 📅 Interactive rental date selection
+- 🛒 Rental checkout flow
+- 💳 Stripe Checkout integration
+- 📋 Rental order history
+- 📊 Order status tracking
+- 💰 Payment history
+- ⭐ Submit reviews after returning equipment
+
+### 🏪 Provider
+
+- 📊 Provider dashboard
+- 📦 Gear inventory management
+- ➕ Add new equipment
+- ✏️ Edit equipment
+- 🗑️ Remove equipment
+- 💰 Manage rental pricing
+- 📈 Inventory statistics
+- 📋 Incoming rental orders
+- 🔄 Update rental status
+- 👤 Provider profile
+
+### 🛡️ Admin
+
+- 📊 Platform overview
+- 👥 User management
+- 🚫 Suspend users
+- ✅ Activate users
+- 🏋️ Gear moderation
+- 📋 Rental management
+- 📈 Platform statistics
+- 🗂️ Category management
+
+---
+
+# 🛠️ Tech Stack
+
+## 🎨 Frontend
+
+| Technology          | Purpose                                    |
+| ------------------- | ------------------------------------------ |
+| ⚡ **Next.js**      | React framework & application architecture |
+| ⚛️ **React**        | UI development                             |
+| 🔷 **TypeScript**   | Type-safe development                      |
+| 🎨 **Tailwind CSS** | Styling & responsive design                |
+| 🧩 **shadcn/ui**    | Reusable accessible UI components          |
+| 🎯 **Lucide React** | Interface icons                            |
+| 🖼️ **next/image**   | Optimized image rendering                  |
+
+---
+
+## 🔄 Data & API
+
+| Technology | Purpose                  |
+| ---------- | ------------------------ |
+| 🛡️ **Zod** | Form and data validation |
+
+---
+
+## 💳 Payments
+
+| Technology             | Purpose                        |
+| ---------------------- | ------------------------------ |
+| 💳 **Stripe Checkout** | Secure rental payments         |
+| 🔔 **Stripe Webhooks** | Payment status synchronization |
+
+---
+
+## 🎨 UI & UX
+
+| Technology          | Purpose                                      |
+| ------------------- | -------------------------------------------- |
+| 🧩 **shadcn/ui**    | Buttons, dialogs, tables, forms, cards, etc. |
+| 🎨 **Tailwind CSS** | Responsive design system                     |
