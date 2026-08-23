@@ -1,7 +1,7 @@
 import { getGears } from "@/app/gear/_actions/gearAction";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Heart, Package, Star } from "lucide-react";
+import { Package, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export default async function GridList() {
           >
             <Link href={`/gear/${data.id}`}>
               <div className="bg-muted relative aspect-square">
-                <img
+                <Image
                   src={data.image}
                   alt="Product image"
                   className="object-cover transition-transform group-hover:scale-105"

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Star, Truck, Heart } from "lucide-react";
 import { RentalBookingWidget } from "../../rentalBooking-widget";
 import { getGearById } from "@/app/gear/_actions/gearAction";
+import Image from "next/image";
 
 export default async function ClassicOverview({ id }: { id: string }) {
   let gearData = null;
@@ -16,8 +17,9 @@ export default async function ClassicOverview({ id }: { id: string }) {
       <div className="mx-auto w-full max-w-7xl p-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div className=" relative aspect-square overflow-hidden  bg-white rounded-2xl">
-            <img
+            <Image
               src={data.image}
+              alt={data.name}
               className="h-full w-full object-cover"
               width={800}
               height={800}
