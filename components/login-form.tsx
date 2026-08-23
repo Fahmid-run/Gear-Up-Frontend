@@ -11,7 +11,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { loginAction } from "@/app/(auth)/_actions/authAction";
+import { loginAction } from "@/app/auth/_actions/authAction";
 import { useActionState, useEffect } from "react";
 import { toast } from "./ui/toast";
 import router from "next/router";
@@ -132,7 +132,7 @@ export function LoginForm({
               <FieldDescription className="text-center">
                 Don&apos;t have an account?{" "}
                 <Link
-                  href="/register"
+                  href="/auth/register"
                   className="font-medium text-foreground underline underline-offset-4 hover:text-primary"
                 >
                   Sign Up

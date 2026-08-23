@@ -16,7 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SignUpAction } from "@/app/(auth)/_actions/authAction";
+import { SignUpAction } from "@/app/auth/_actions/authAction";
 import { toast } from "./ui/toast";
 
 type Role = "customer" | "provider";

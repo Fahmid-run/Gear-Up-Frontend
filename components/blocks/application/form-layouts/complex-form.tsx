@@ -27,6 +27,22 @@ export default function ComplexForm() {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const allowedTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
+
+    if (!allowedTypes.includes(file?.type)) {
+      toast.add({
+        type: "error",
+        description: "Please select a PNG, JPG, GIF or WEBP image.",
+      });
+
+      event.target.value = "";
+
+      return;
+    }
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
