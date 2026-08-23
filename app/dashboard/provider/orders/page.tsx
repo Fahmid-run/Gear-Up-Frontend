@@ -4,6 +4,7 @@ import {
   getProviderRentalOrders,
 } from "@/service/rentalItem";
 import React from "react";
+export const dynamic = "force-dynamic";
 
 const RentalOrderspage = async () => {
   const getRentals = await getProviderRentalOrders();
