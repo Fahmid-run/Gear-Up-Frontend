@@ -105,7 +105,6 @@ export function RentalOrdersTable({
         <h2 className="text-lg font-semibold text-balance">Rental orders</h2>
         <button
           type="button"
-          onClick={onViewAll}
           className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           View all
