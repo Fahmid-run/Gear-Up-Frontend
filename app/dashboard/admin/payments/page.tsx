@@ -1,5 +1,6 @@
 import { PaymentTable } from "@/components/payment/paymnetList";
 import { getAllPayments } from "@/service/adminService";
+export const dynamic = "force-dynamic";
 
 const PaymentPage = async () => {
   const res = await getAllPayments();

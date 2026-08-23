@@ -1,6 +1,7 @@
 import { PaymentTable } from "@/components/payment/paymnetList";
 import { getPaymentList } from "@/service/paymentService";
 import React from "react";
+export const dynamic = "force-dynamic";
 
 const PaymentPage = async () => {
   const res = await getPaymentList();

@@ -1,5 +1,6 @@
 import { GearList } from "@/components/blocks/gearList";
 import { getAllGears } from "@/service/adminService";
+export const dynamic = "force-dynamic";
 
 const GearPage = async () => {
   const gearItems = await getAllGears();

@@ -1,6 +1,8 @@
 import { CustomerOverviewSection } from "@/components/dashboard/customer-overview";
 import { getCustomerStates } from "@/service/customerService";
 
+export const dynamic = "force-dynamic";
+
 export default async function CustomerDashboard() {
   const stats = await getCustomerStates();
 
