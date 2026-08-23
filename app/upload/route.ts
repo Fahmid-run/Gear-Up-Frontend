@@ -1,4 +1,3 @@
-import { File } from "buffer";
 import { writeFile } from "fs/promises";
 import { NextResponse } from "next/server";
 import path from "path";

@@ -21,6 +21,7 @@ export default async function GridList() {
                 <Image
                   src={data.image}
                   alt="Product image"
+                  fill
                   className="object-cover transition-transform group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
