@@ -23,7 +23,7 @@ export const createReview = async (payload: {
       },
     );
 
-    const result = res.json();
+    const result = await res.json();
 
     return result;
   } catch (error) {
@@ -47,7 +47,7 @@ export const getReviews = async (gearItemId: string) => {
       },
     );
 
-    const result = res.json();
+    const result = await res.json();
 
     return result;
   } catch (error) {

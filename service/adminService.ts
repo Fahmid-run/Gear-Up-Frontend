@@ -15,7 +15,7 @@ export const getAllUser = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -32,7 +32,7 @@ export const getStates = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -50,7 +50,7 @@ export const getAllRentals = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -68,7 +68,7 @@ export const getAllGears = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -91,5 +91,7 @@ export const getAllPayments = async () => {
     },
   });
 
-  return res.json();
+  const result = await res.json();
+
+  return result;
 };

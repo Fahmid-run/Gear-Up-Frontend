@@ -51,13 +51,9 @@ const statusLabels: Record<RentalStatus, string> = {
 export function RentalOrdersTable({
   orders,
   userRole,
-  onViewAll,
-  onViewDetails,
 }: {
   orders?: any[];
   userRole: "Customer" | "Provider" | "Admin";
-  onViewAll?: () => void;
-  onViewDetails?: (order: any) => void;
 }) {
   const router = useRouter();
 

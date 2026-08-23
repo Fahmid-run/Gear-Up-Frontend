@@ -16,7 +16,7 @@ export const providerOverviewStats = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -36,7 +36,7 @@ export const getProviderPayments = async () => {
     },
   );
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -57,7 +57,7 @@ export const deleteGear = async (gearId: string) => {
     },
   );
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };

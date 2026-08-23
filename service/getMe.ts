@@ -25,7 +25,7 @@ export const getMe = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -50,7 +50,7 @@ export const getUser = async (id: string) => {
     },
   );
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };

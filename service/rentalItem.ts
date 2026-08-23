@@ -23,7 +23,7 @@ export const createRentalItem = async (payload: IRentalPaylaod) => {
       body: JSON.stringify(payload),
     });
 
-    const result = res.json();
+    const result = await res.json();
 
     return result;
   } catch (error) {
@@ -49,7 +49,7 @@ export const getMyRentalOrders = async () => {
       },
     });
 
-    const result = res.json();
+    const result = await res.json();
 
     return result;
   } catch (error) {
@@ -82,7 +82,7 @@ export const getProviderRentalOrders = async () => {
       },
     );
 
-    const result = res.json();
+    const result = await res.json();
 
     return result;
   } catch (error) {
@@ -120,7 +120,7 @@ export const updateRentalORderStatus = async (
       },
     );
 
-    const result = res.json();
+    const result = await res.json();
 
     return result;
   } catch (error) {

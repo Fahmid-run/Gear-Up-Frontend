@@ -19,7 +19,7 @@ export const getMyGear = async () => {
     },
   });
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -44,7 +44,7 @@ export const getGearItemById = async (gearItemId: string) => {
     },
   );
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };

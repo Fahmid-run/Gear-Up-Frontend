@@ -24,7 +24,7 @@ export const paymentInitialization = async (rentalOrderId: string) => {
     },
   );
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };
@@ -47,7 +47,9 @@ export const getPaymentList = async () => {
     },
   });
 
-  return res.json();
+  const result = await res.json();
+
+  return result;
 };
 
 export const getSinglePayments = async (paymnentId: string) => {
@@ -70,6 +72,7 @@ export const getSinglePayments = async (paymnentId: string) => {
       },
     },
   );
+  const result = await res.json();
 
-  return res.json();
+  return result;
 };

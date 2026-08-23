@@ -24,7 +24,7 @@ export const getNewAcessToken = async () => {
     },
   );
 
-  const result = res.json();
+  const result = await res.json();
 
   return result;
 };

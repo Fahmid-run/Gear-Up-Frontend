@@ -1,6 +1,8 @@
 import { RentalOrdersTable } from "@/components/blocks/rentalOrders/rentalOrderTable";
 import { getMyRentalOrders } from "@/service/rentalItem";
 
+export const dynamic = "force-dynamic";
+
 const RentalOrderspage = async () => {
   const getRentals = await getMyRentalOrders();
 
