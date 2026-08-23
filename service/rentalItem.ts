@@ -53,7 +53,11 @@ export const getMyRentalOrders = async () => {
 
     return result;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+
+    throw new Error("An unexpected error occurred.");
   }
 };
 
