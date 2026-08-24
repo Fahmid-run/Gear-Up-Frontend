@@ -109,7 +109,7 @@ export function Sidebar() {
       type: "success",
       description: "Logout",
     });
-    router.push("/login");
+    router.push("/auth/login");
   };
 
   return (

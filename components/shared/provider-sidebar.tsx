@@ -16,6 +16,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { logout } from "@/service/getMe";
+import { toast } from "../ui/toast";
+import { useRouter } from "next/navigation";
 
 interface SidebarLink {
   icon: React.ReactNode;
@@ -54,6 +57,7 @@ export function ProviderSidebar({ children }: { children: React.ReactNode }) {
 export function Sidebar() {
   const { isOpen, setIsOpen } = useSidebar();
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const router = useRouter();
 
   const sidebarLinks: SidebarLink[] = [
     {
@@ -92,9 +96,13 @@ export function Sidebar() {
       href: "/account/profile",
     },
   ];
-  const handleLogout = () => {
-    // Handle logout logic here
-    console.log("Logging out...");
+  const handleLogout = async () => {
+    await logout();
+    toast.add({
+      type: "success",
+      description: "Logout",
+    });
+    router.push("/auth/login");
   };
 
   return (
