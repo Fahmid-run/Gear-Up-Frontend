@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useMemo } from "react";
 import {
   Table,
@@ -15,6 +14,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Search } from "lucide-react";
+import { updateUserAccountStatus } from "@/service/adminService";
+import { toast } from "../ui/toast";
+import { useRouter } from "next/navigation";
 type UserRole = "Admin" | "Provider" | "Customer";
 
 export interface User {
@@ -37,6 +39,8 @@ export function UserManagement({ users: initialUsers }: UserManagementProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
+  const router = useRouter();
+
   // Filter users based on search query
   const filteredUsers = useMemo(() => {
     return users.filter(
@@ -55,20 +59,32 @@ export function UserManagement({ users: initialUsers }: UserManagementProps) {
     return filteredUsers.slice(startIdx, endIdx);
   }, [filteredUsers, currentPage]);
 
-  // Handle user status toggle
-  const toggleUserStatus = (userId: string) => {
-    setUsers(
-      users.map((user) =>
-        user.id === userId
-          ? {
-              ...user,
-              status: user.status === "ACTIVE" ? "SUSPENDED" : "ACTIVE",
-            }
-          : user,
-      ),
-    );
-  };
+  const toggleUserStatus = async (
+    userId: string,
+    currentStatus: "ACTIVE" | "SUSPENDED",
+  ) => {
+    try {
+      // Determine the next status
+      const newStatus = currentStatus === "ACTIVE" ? "SUSPENDED" : "ACTIVE";
 
+      const updateStatus = await updateUserAccountStatus(userId, newStatus);
+
+      if (updateStatus.success) {
+        toast.add({
+          type: "success",
+          description: updateStatus.message,
+        });
+        router.refresh();
+      } else {
+        toast.add({
+          type: "error",
+          description: updateStatus.message,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   // Reset to page 1 when search query changes
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -143,7 +159,7 @@ export function UserManagement({ users: initialUsers }: UserManagementProps) {
                           user.status === "ACTIVE" ? "outline" : "default"
                         }
                         size="sm"
-                        onClick={() => toggleUserStatus(user.id)}
+                        onClick={() => toggleUserStatus(user.id, user.status)}
                       >
                         {user.status === "ACTIVE" ? "Suspend" : "Activate"}
                       </Button>

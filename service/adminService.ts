@@ -95,3 +95,28 @@ export const getAllPayments = async () => {
 
   return result;
 };
+
+export const updateUserAccountStatus = async (
+  userId: string,
+  status: "ACTIVE" | "SUSPENDED",
+) => {
+  const cookie = cookies();
+
+  const accessToken = (await cookie).get("accessToken")?.value;
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/admin/users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${accessToken}`,
+      },
+      body: JSON.stringify({ status }),
+    },
+  );
+
+  const result = await res.json();
+
+  return result;
+};

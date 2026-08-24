@@ -32,9 +32,6 @@ The frontend communicates with the GearUp backend through REST APIs and provides
 
 - 🏠 Modern landing page
 - 🏋️ Browse sports & outdoor equipment
-- 🔎 Search and filtering
-- 🏷️ Category filtering
-- 💰 Price filtering
 - ⭐ Gear ratings
 - 📦 Availability indicators
 - 🖼️ Optimized gear images
