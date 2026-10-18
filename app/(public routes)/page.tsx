@@ -1,10 +1,12 @@
 import GridList from "@/components/blocks/ecommerce/product-list/grid-list";
+import HomePage from "@/components/home-pages";
 import React from "react";
 
 const MainPage = () => {
   return (
     <div>
-      <GridList></GridList>
+      <HomePage></HomePage>
+      {/* <GridList></GridList> */}
     </div>
   );
 };

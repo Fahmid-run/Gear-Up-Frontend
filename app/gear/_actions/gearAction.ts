@@ -7,6 +7,8 @@ export const getGears = async () => {
 
   const result = res.json();
 
+  console.log(result);
+
   return result;
 };
 

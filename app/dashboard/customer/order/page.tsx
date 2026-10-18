@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 
 const RentalOrderspage = async () => {
   const getRentals = await getMyRentalOrders();
+  console.log(getRentals);
 
   return (
     <div className="flex min-h-svh flex-col bg-muted p-6 md:p-10">

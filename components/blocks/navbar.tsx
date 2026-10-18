@@ -20,6 +20,10 @@ import { useRouter } from "next/navigation";
 export function SiteNavbar({ user }: any) {
   const navLinks = [
     { label: "Home", href: "/" },
+    { label: "About Us", href: "#about" },
+    { label: "Explore Gear", href: "/gears" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Contact", href: "#contact" },
     {
       label: "Dashboard",
       href: `/dashboard/${user?.data?.role.toLowerCase()}`,
@@ -47,7 +51,7 @@ export function SiteNavbar({ user }: any) {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <header className="sticky top-0 z-40 w-full  border-b border-[#17352b]/10  bg-[#f7f5ef]/95  backdrop-blur supports-backdrop-filter:bg-background/60">
       <nav
         className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
         aria-label="Main navigation"

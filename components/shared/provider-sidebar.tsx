@@ -63,7 +63,7 @@ export function Sidebar() {
     {
       icon: <HomeIcon className="w-5 h-5" />,
       label: "Home",
-      href: "/",
+      href: "/gears",
     },
     {
       icon: <LayoutDashboard className="w-5 h-5" />,
