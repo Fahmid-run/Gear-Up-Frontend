@@ -35,7 +35,7 @@ export function SiteNavbar({ user }: any) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const visibleLinks = user?.success
     ? navLinks.filter((link) => !["Register", "Login"].includes(link.label))
-    : navLinks;
+    : navLinks.filter((link) => !["Dashboard"].includes(link.label));
 
   const router = useRouter();
 
@@ -81,16 +81,18 @@ export function SiteNavbar({ user }: any) {
         <div className="flex items-center gap-2">
           {user?.success && (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full"
-                  aria-label="Open profile menu"
-                >
-                  <User className="size-5" />
-                </Button>
-              </DropdownMenuTrigger>
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full"
+                    aria-label="Open profile menu"
+                  >
+                    <User className="size-5" />
+                  </Button>
+                }
+              ></DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuGroup>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>

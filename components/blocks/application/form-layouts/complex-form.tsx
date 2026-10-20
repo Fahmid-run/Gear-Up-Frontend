@@ -19,9 +19,11 @@ import { useActionState, useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toast";
 import { gearAction } from "@/app/dashboard/provider/gear/_actions/gearAction";
+import { useRouter } from "next/navigation";
 
 export default function ComplexForm() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -143,12 +145,30 @@ export default function ComplexForm() {
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="cycling">cycling</SelectItem>
-                      <SelectItem value="camping">camping</SelectItem>
-                      <SelectItem value="fitness">fitness</SelectItem>
-                      <SelectItem value="sports">sports</SelectItem>
-
-                      <SelectItem value="water">water</SelectItem>
+                      <SelectItem value="fitness">Fitness</SelectItem>
+                      <SelectItem value="camping">Camping</SelectItem>
+                      <SelectItem value="hiking">Hiking</SelectItem>
+                      <SelectItem value="cycling">Cycling</SelectItem>
+                      <SelectItem value="water_sports">Water Sports</SelectItem>
+                      <SelectItem value="team_sports">Team Sports</SelectItem>
+                      <SelectItem value="racket_sports">
+                        Racket Sports
+                      </SelectItem>
+                      <SelectItem value="winter_sports">
+                        Winter Sports
+                      </SelectItem>
+                      <SelectItem value="fishing">Fishing</SelectItem>
+                      <SelectItem value="climbing">Climbing</SelectItem>
+                      <SelectItem value="adventure">Adventure</SelectItem>
+                      <SelectItem value="protective_gear">
+                        Protective Gear
+                      </SelectItem>
+                      <SelectItem value="fitness_accessories">
+                        Fitness Accessories
+                      </SelectItem>
+                      <SelectItem value="outdoor_accessories">
+                        Outdoor Accessories
+                      </SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -298,7 +318,11 @@ export default function ComplexForm() {
             </div> */}
 
             <div className="flex justify-end gap-4">
-              <Button variant="outline" type="button">
+              <Button
+                variant="outline"
+                type="button"
+                onClick={() => router.back()}
+              >
                 Cancel
               </Button>
               <Button type="submit">Create Gear</Button>

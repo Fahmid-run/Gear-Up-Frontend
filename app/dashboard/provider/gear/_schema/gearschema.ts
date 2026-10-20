@@ -10,7 +10,22 @@ export const gearSchema = z.object({
 
   brand: z.string().trim().min(2, "Brand is required"),
 
-  category: z.enum(["cycling", "camping", "fitness", "sports", "water"]),
+  category: z.enum([
+    "fitness",
+    "camping",
+    "hiking",
+    "cycling",
+    "water_sports",
+    "team_sports",
+    "racket_sports",
+    "winter_sports",
+    "fishing",
+    "climbing",
+    "adventure",
+    "protective_gear",
+    "fitness_accessories",
+    "outdoor_accessories",
+  ]),
 
   availability: z.enum(["AVAILABLE", "UNAVAILABLE"]),
 

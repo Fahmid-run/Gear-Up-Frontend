@@ -12,6 +12,7 @@ export default async function ClassicOverview({ id }: { id: string }) {
   }
 
   const data = gearData.data;
+  console.log(data);
   const availability = data.availability.toLowerCase();
 
   return (

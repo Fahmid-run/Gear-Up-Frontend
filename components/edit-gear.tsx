@@ -222,15 +222,30 @@ export default function GearEdit({ data }: GearEditProps) {
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="cycling">Cycling</SelectItem>
-
-                      <SelectItem value="camping">Camping</SelectItem>
-
                       <SelectItem value="fitness">Fitness</SelectItem>
-
-                      <SelectItem value="sports">Sports</SelectItem>
-
-                      <SelectItem value="water">Water</SelectItem>
+                      <SelectItem value="camping">Camping</SelectItem>
+                      <SelectItem value="hiking">Hiking</SelectItem>
+                      <SelectItem value="cycling">Cycling</SelectItem>
+                      <SelectItem value="water_sports">Water Sports</SelectItem>
+                      <SelectItem value="team_sports">Team Sports</SelectItem>
+                      <SelectItem value="racket_sports">
+                        Racket Sports
+                      </SelectItem>
+                      <SelectItem value="winter_sports">
+                        Winter Sports
+                      </SelectItem>
+                      <SelectItem value="fishing">Fishing</SelectItem>
+                      <SelectItem value="climbing">Climbing</SelectItem>
+                      <SelectItem value="adventure">Adventure</SelectItem>
+                      <SelectItem value="protective_gear">
+                        Protective Gear
+                      </SelectItem>
+                      <SelectItem value="fitness_accessories">
+                        Fitness Accessories
+                      </SelectItem>
+                      <SelectItem value="outdoor_accessories">
+                        Outdoor Accessories
+                      </SelectItem>
                     </SelectContent>
                   </Select>
 
