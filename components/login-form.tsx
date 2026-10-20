@@ -11,7 +11,11 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { loginAction } from "@/app/auth/_actions/authAction";
+import {
+  loginAction,
+  loginAsCustomerAction,
+  loginAsProviderAction,
+} from "@/app/auth/_actions/authAction";
 import { useActionState, useEffect } from "react";
 import { toast } from "./ui/toast";
 import router from "next/router";
@@ -22,6 +26,20 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [state, action, pending] = useActionState(loginAction, false);
+  const [providerState, providerAction, providerPending] = useActionState(
+    loginAsProviderAction,
+    {
+      success: false,
+      message: "",
+    },
+  );
+  const [customerState, customerAction, customerPending] = useActionState(
+    loginAsCustomerAction,
+    {
+      success: false,
+      message: "",
+    },
+  );
 
   useEffect(() => {
     if (!state) {
@@ -41,11 +59,47 @@ export function LoginForm({
       });
     }
   }, [state]);
+
+  useEffect(() => {
+    if (!providerState) {
+      return;
+    }
+
+    if (providerState.success) {
+      toast.add({
+        type: "success",
+        description: "Provider Login Succeeded",
+      });
+    } else if (providerState.message) {
+      toast.add({
+        type: "error",
+        description: providerState.message || "Provider Login Failed",
+      });
+    }
+  }, [customerState]);
+
+  useEffect(() => {
+    if (!customerState) {
+      return;
+    }
+
+    if (customerState.success) {
+      toast.add({
+        type: "success",
+        description: "Customer Login Succeeded",
+      });
+    } else if (customerState.message) {
+      toast.add({
+        type: "error",
+        description: customerState.message || "Customer Login Failed",
+      });
+    }
+  }, [customerState]);
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent>
-          <form action={action} className="p-6 ">
+          <form action={action} className="px-6 py-3 ">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -97,6 +151,7 @@ export function LoginForm({
                   {pending ? "Submitting" : "Login"}
                 </Button>
               </Field>
+
               {/* <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                 Or continue with
               </FieldSeparator>
@@ -129,20 +184,44 @@ export function LoginForm({
                   <span className="sr-only">Login with Meta</span>
                 </Button>
               </Field> */}
-              <FieldDescription className="text-center">
-                Don&apos;t have an account?{" "}
-                <Link
-                  href="/auth/register"
-                  className="font-medium text-foreground underline underline-offset-4 hover:text-primary"
-                >
-                  Sign Up
-                </Link>
-              </FieldDescription>
             </FieldGroup>
           </form>
+
+          <form action={providerAction} className="px-6">
+            <Button
+              type="submit"
+              disabled={providerPending}
+              className="w-full px-20 mb-2"
+            >
+              {providerPending
+                ? "Logging in as Provider..."
+                : "Login As A Provider"}
+            </Button>
+          </form>
+          <form action={customerAction} className="px-6">
+            <Button
+              type="submit"
+              disabled={customerPending}
+              className="w-full px-20 mb-2"
+            >
+              {customerPending
+                ? "Logging in as Customer..."
+                : "Login As A Customer"}
+            </Button>
+          </form>
+
+          <FieldDescription className="text-center pb-5">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/auth/register"
+              className="font-medium text-foreground underline underline-offset-4 hover:text-primary"
+            >
+              Sign Up
+            </Link>
+          </FieldDescription>
         </CardContent>
       </Card>
-      <FieldDescription className="px-6 text-center">
+      <FieldDescription className="text-center pb-10">
         By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </FieldDescription>

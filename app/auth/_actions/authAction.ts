@@ -111,3 +111,110 @@ export const SignUpAction = async (
   return result;
   redirect("/login", "replace");
 };
+
+export const loginAsProviderAction = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const payload = {
+    email: process.env.PROVIDER_EMAIL,
+    password: process.env.PROVIDER_PWD,
+  };
+
+  try {
+    const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok || !result.success) {
+      return {
+        success: false,
+        message: result.message || "Login failed.",
+      };
+    }
+
+    const cookieStore = await cookies();
+
+    cookieStore.set("accessToken", result.data.accessToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+
+    cookieStore.set("refreshToken", result.data.refreshToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 7,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+  } catch {
+    return {
+      success: false,
+      message: "Unable to connect to the server.",
+    };
+  }
+
+  redirect("/dashboard/provider");
+};
+export const loginAsCustomerAction = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  const payload = {
+    email: process.env.CUSTOMER_EMAIL,
+    password: process.env.CUSTOMER_PWD,
+  };
+
+  try {
+    const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok || !result.success) {
+      return {
+        success: false,
+        message: result.message || "Login failed.",
+      };
+    }
+
+    const cookieStore = await cookies();
+
+    cookieStore.set("accessToken", result.data.accessToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+
+    cookieStore.set("refreshToken", result.data.refreshToken, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 7,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+  } catch {
+    return {
+      success: false,
+      message: "Unable to connect to the server.",
+    };
+  }
+
+  redirect("/dashboard/customer");
+};
