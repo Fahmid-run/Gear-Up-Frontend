@@ -124,9 +124,11 @@ export default function HomePage() {
             memories.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button className="h-12 rounded-full bg-[#e8774d] px-6 text-base text-white shadow-lg shadow-[#e8774d]/20 hover:bg-[#d9673d]">
-              Explore gear <ArrowRight data-icon="inline-end" />
-            </Button>
+            <Link href={"/gears"}>
+              <Button className="h-12 rounded-full bg-[#e8774d] px-6 text-base text-white shadow-lg shadow-[#e8774d]/20 hover:bg-[#d9673d]">
+                Explore gear <ArrowRight data-icon="inline-end" />
+              </Button>
+            </Link>
             <Button
               variant="outline"
               className="h-12 rounded-full border-[#17352b]/20 bg-transparent px-6 text-base text-[#17352b] hover:bg-white"

@@ -95,10 +95,10 @@ export default async function PublicLayout({
                 <h3 className="font-semibold">Say hello</h3>
                 <div className="mt-5 flex flex-col gap-3 text-sm text-[#b9d0c1]">
                   <a href="mailto:hello@gearup.co" className="hover:text-white">
-                    hello@gearup.co
+                    company@gearup.co
                   </a>
                   <span>Mon–Fri, 9am–6pm</span>
-                  <span>Portland, Oregon</span>
+                  <span>Dhaka, Bangladesh</span>
                 </div>
               </div>
             </div>

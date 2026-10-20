@@ -80,15 +80,39 @@ export function SiteNavbar({ user }: any) {
 
         <div className="flex items-center gap-2">
           {user?.success && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hidden rounded-full md:inline-flex"
-              aria-label="Open profile"
-            >
-              <User aria-hidden="true" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full"
+                  aria-label="Open profile menu"
+                >
+                  <User className="size-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem render={<Link href="/account/profile" />}>
+                    <UserCircle className="size-4" />
+                    My Profile
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                  >
+                    <LogOut className="size-4"></LogOut>
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
+
           <Button
             variant="ghost"
             size="icon"
@@ -158,42 +182,6 @@ export function SiteNavbar({ user }: any) {
               )}
             </ul>
           </aside>
-
-          {user.success && (
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-full"
-                    aria-label="Open profile menu"
-                  />
-                }
-              >
-                <User className="size-5" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuGroup>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem render={<Link href="/account/profile" />}>
-                    <UserCircle className="size-4" />
-                    My Profile
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem
-                    onClick={() => {
-                      handleLogout();
-                    }}
-                  >
-                    <LogOut className="size-4"></LogOut>
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
         </>
       )}
     </header>
