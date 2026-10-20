@@ -36,8 +36,7 @@ const categories = [
   {
     name: "Water Sports",
     description: "Make a splash with gear that goes further.",
-    image:
-      "https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=900&q=85",
+    image: "https://unsplash.com/photos/woman-on-kayak-qxD1jo7KW70",
     icon: Waves,
   },
   {
@@ -314,12 +313,12 @@ export default function HomePage() {
                 out the door.
               </h2>
             </div>
-            <a
-              href="#categories"
+            <Link
+              href="/gears"
               className="flex items-center gap-2 text-sm font-semibold text-[#f3b18f]"
             >
               Browse the collection <ArrowRight className="size-4" />
-            </a>
+            </Link>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {featuredGear.map((gear) => (
@@ -416,9 +415,11 @@ export default function HomePage() {
               when you gear up?
             </h2>
           </div>
-          <Button className="h-12 shrink-0 rounded-full bg-[#fffaf0] px-6 text-[#17352b] hover:bg-white">
-            Start exploring <ArrowRight data-icon="inline-end" />
-          </Button>
+          <Link href={"/gears"}>
+            <Button className="h-12 shrink-0 rounded-full bg-[#fffaf0] px-6 text-[#17352b] hover:bg-white">
+              Start exploring <ArrowRight data-icon="inline-end" />
+            </Button>
+          </Link>
         </div>
       </section>
     </main>

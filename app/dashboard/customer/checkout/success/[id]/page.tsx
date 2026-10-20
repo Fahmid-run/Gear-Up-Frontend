@@ -14,7 +14,7 @@ const PaymentSuccess = async ({
 
   return (
     <div>
-      <PaymentSuccessPage payload={payment.data}></PaymentSuccessPage>
+      <PaymentSuccessPage data={payment.data}></PaymentSuccessPage>
     </div>
   );
 };

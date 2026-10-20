@@ -3,16 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
-export function PaymentSuccessPage({ payload }: { payload: any }) {
+export function PaymentSuccessPage({ data }: { data: any }) {
   const formattedAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: payload.currency,
-  }).format(payload.amount);
+    currency: data.currency,
+  }).format(data.amount);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-accent/5 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-background to-accent/5 p-4">
       <div className="w-full max-w-md">
         {/* Success Card */}
         <div className="bg-card rounded-xl shadow-lg p-8 border border-border">
@@ -38,7 +37,7 @@ export function PaymentSuccessPage({ payload }: { payload: any }) {
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">Order ID</span>
               <span className="font-mono font-light text-foreground">
-                {payload.rentalOrderId}
+                {data.rentalOrderId}
               </span>
             </div>
 
@@ -46,7 +45,7 @@ export function PaymentSuccessPage({ payload }: { payload: any }) {
             <div className="flex justify-between items-center border-t border-border pt-4">
               <span className="text-sm text-muted-foreground">Payment ID</span>
               <span className="font-mono font-light text-foreground text-sm">
-                {payload.id}
+                {data.id}
               </span>
             </div>
 
@@ -62,7 +61,7 @@ export function PaymentSuccessPage({ payload }: { payload: any }) {
             <div className="flex justify-between items-center border-t border-border pt-4">
               <span className="text-sm text-muted-foreground">Date & Time</span>
               <span className="text-sm font-medium text-foreground">
-                {new Date(payload.paidAt).toLocaleString("en-US", {
+                {new Date(data.paidAt).toLocaleString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
