@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-export const dynamic = "force-dynamic";
 
 export const getCustomerStates = async () => {
   const cookie = cookies();

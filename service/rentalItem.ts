@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-export const dynamic = "force-dynamic";
 
 interface IRentalPaylaod {
   id: string;

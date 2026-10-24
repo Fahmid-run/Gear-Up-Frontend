@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-export const dynamic = "force-dynamic";
 
 export const getAllUser = async () => {
   const cookie = cookies();
@@ -9,8 +8,8 @@ export const getAllUser = async () => {
   const accessToken = (await cookie).get("accessToken")?.value;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/users`, {
+    method: "GET",
     headers: {
-      method: "GET",
       "Content-Type": "application/json",
       Authorization: `${accessToken}`,
     },
@@ -27,8 +26,8 @@ export const getStates = async () => {
   const accessToken = (await cookie).get("accessToken")?.value;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/stats`, {
+    method: "GET",
     headers: {
-      method: "GET",
       Authorization: `${accessToken}`,
     },
   });
@@ -44,8 +43,8 @@ export const getAllRentals = async () => {
   const accessToken = (await cookie).get("accessToken")?.value;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/rentals`, {
+    method: "GET",
     headers: {
-      method: "GET",
       "Content-Type": "application/json",
       Authorization: `${accessToken}`,
     },
@@ -62,8 +61,8 @@ export const getAllGears = async () => {
   const accessToken = (await cookie).get("accessToken")?.value;
 
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/admin/gears`, {
+    method: "GET",
     headers: {
-      method: "GET",
       "Content-Type": "application/json",
       Authorization: `${accessToken}`,
     },

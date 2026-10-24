@@ -14,9 +14,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Search } from "lucide-react";
-import { updateUserAccountStatus } from "@/service/adminService";
 import { toast } from "../ui/toast";
 import { useRouter } from "next/navigation";
+import { updateUserAccountStatus } from "@/service/adminService";
 type UserRole = "Admin" | "Provider" | "Customer";
 
 export interface User {
