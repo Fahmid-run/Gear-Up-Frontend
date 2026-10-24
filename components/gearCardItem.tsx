@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-function GearCardItem({ item }) {
+function GearCardItem({ item }: { item: any }) {
   const fallbackImage = "/uploads/placeholder.jpg";
 
   const [imgSrc, setImgSrc] = useState(item?.image || fallbackImage);
