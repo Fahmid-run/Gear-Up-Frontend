@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+export const dynamic = "force-dynamic";
 
 interface IRentalPaylaod {
   id: string;
@@ -62,32 +63,29 @@ export const getMyRentalOrders = async () => {
 };
 
 export const getProviderRentalOrders = async () => {
-  try {
-    const cookie = cookies();
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-    const accessToken = (await cookie).get("accessToken")?.value;
-    if (!accessToken) {
-      return {
-        success: false,
-        message: "Forbidden",
-      };
-    }
-    const res = await fetch(
-      `${process.env.BACKEND_API_URL}/api/provider/rentals`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `${accessToken}`,
-        },
-      },
-    );
-
-    const result = await res.json();
-
-    return result;
-  } catch (error) {
-    console.log(error);
+  if (!accessToken) {
+    throw new Error("You must be logged in to view provider orders.");
   }
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/provider/rentals`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: accessToken,
+      },
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch provider rental orders: ${res.status}`);
+  }
+
+  return await res.json();
 };
 
 export const updateRentalORderStatus = async (

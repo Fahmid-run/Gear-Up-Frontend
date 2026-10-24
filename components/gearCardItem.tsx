@@ -4,7 +4,6 @@ import { ArrowRight, Eye, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-
 function GearCardItem({ item }: { item: any }) {
   const fallbackImage = "/uploads/placeholder.jpg";
 
